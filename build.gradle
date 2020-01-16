@@ -1,0 +1,41 @@
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'idea'
+
+
+def versions = [ cucumber : '4.8.1' ]
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //compile  group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.12', ext: 'pom'
+    //testCompile group: 'io.cucumber', name: 'cucumber-groovy', version: "$versions.cucumber"
+
+    //we will use the Groovy version that ships with Gradle:
+    implementation localGroovy()
+
+    testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: "$versions.cucumber"
+    //testCompile group: 'io.cucumber', name: 'cucumber-testng', version: "$versions.cucumber"
+    testImplementation group: 'io.cucumber', name: 'cucumber-java8', version: "$versions.cucumber"
+    testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: "$versions.cucumber"
+
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'com.auto.steps', 'src/test/resources/features']
+        }
+    }
+}
