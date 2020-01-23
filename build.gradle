@@ -10,16 +10,13 @@ repositories {
 }
 
 dependencies {
-    //compile  group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.12', ext: 'pom'
-    //testCompile group: 'io.cucumber', name: 'cucumber-groovy', version: "$versions.cucumber"
-
     //we will use the Groovy version that ships with Gradle:
     implementation localGroovy()
-
     testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: "$versions.cucumber"
     //testCompile group: 'io.cucumber', name: 'cucumber-testng', version: "$versions.cucumber"
     testImplementation group: 'io.cucumber', name: 'cucumber-java8', version: "$versions.cucumber"
     testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: "$versions.cucumber"
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.1'
 
 }
 
@@ -29,7 +26,14 @@ configurations {
     }
 }
 
-task cucumber() {
+task setupEnv {
+    // Create directory if doesn't exist
+    File reportLogs = new File("logs/") // log files
+    if (!reportLogs.exists())
+        reportLogs.mkdir()
+}
+
+task cucumber(dependsOn:setupEnv) {
     dependsOn assemble, compileTestJava
     doLast {
         javaexec {
