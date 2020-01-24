@@ -3,7 +3,13 @@ apply plugin: 'java'
 apply plugin: 'idea'
 
 
-def versions = [ cucumber : '4.8.1' ]
+def versions = [ cucumber  : '4.8.1',
+                 log4j2    : '2.12.1',
+                 snakeyml  : '1.25']
+def cucumberArgs = ['--plugin', 'pretty', '--glue', 'com.auto.steps']
+def featurePath = 'src/test/resources/features'
+
+
 
 repositories {
     mavenCentral()
@@ -16,7 +22,9 @@ dependencies {
     //testCompile group: 'io.cucumber', name: 'cucumber-testng', version: "$versions.cucumber"
     testImplementation group: 'io.cucumber', name: 'cucumber-java8', version: "$versions.cucumber"
     testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: "$versions.cucumber"
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: "$versions.log4j2"
+    compile group: 'org.yaml', name: 'snakeyaml', version: "$versions.snakeyml"
+
 
 }
 
@@ -26,11 +34,24 @@ configurations {
     }
 }
 
-task setupEnv {
+ext.setUpArgs = {
+    def prefix = prefix as String
+    def execType = (execType as String).toLowerCase()
+    def tags = (tags as String).toLowerCase()
+
+    cucumberArgs.addAll(["$featurePath/$execType", '--tags', tags])
+}
+
+task setupEnv() {
     // Create directory if doesn't exist
     File reportLogs = new File("logs/") // log files
     if (!reportLogs.exists())
         reportLogs.mkdir()
+
+    setUpArgs()
+    // TODO clean logs directory
+    // Save input args config.properties file
+    // Reader -> Properties and YML files
 }
 
 task cucumber(dependsOn:setupEnv) {
@@ -39,7 +60,7 @@ task cucumber(dependsOn:setupEnv) {
         javaexec {
             main = "io.cucumber.core.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ['--plugin', 'pretty', '--glue', 'com.auto.steps', 'src/test/resources/features']
+            args = cucumberArgs
         }
     }
 }
