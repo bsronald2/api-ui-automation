@@ -24,8 +24,6 @@ dependencies {
     testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: "$versions.cucumber"
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: "$versions.log4j2"
     compile group: 'org.yaml', name: 'snakeyaml', version: "$versions.snakeyml"
-
-
 }
 
 configurations {
@@ -40,6 +38,23 @@ ext.setUpArgs = {
     def tags = (tags as String).toLowerCase()
 
     cucumberArgs.addAll(["$featurePath/$execType", '--tags', tags])
+
+    // Save Args into properties file
+    def file = new File(configPath)
+    if (file.exists())
+        file.delete()
+    file.createNewFile()
+
+    def propertyF = new Properties()
+    OutputStream output = new FileOutputStream(configPath)
+
+    propertyF.setProperty("PREFIX", prefix)
+    propertyF.setProperty("TAGS", tags)
+    propertyF.setProperty("EXEC_TYPE", execType)
+
+    propertyF.store(output, null)
+    output.close()
+
 }
 
 task setupEnv() {

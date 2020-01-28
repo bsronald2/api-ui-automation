@@ -1,0 +1,8 @@
+version: 1
+id: "demo"
+user:
+  userName: "r.butron.projects@gmail.com"
+  password: "Control123!"
+api:
+  url: "http://todo.ly/API"
+  token: ""
