@@ -2,11 +2,7 @@ apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'idea'
 
-
-def versions = [ cucumber  : '4.8.1',
-                 log4j2    : '2.12.1',
-                 snakeyml  : '1.25']
-def cucumberArgs = ['--plugin', 'pretty', '--glue', 'com.auto.steps']
+def cucumberArgs = ['--plugin', 'pretty', '--glue', 'com.auto.api']
 def featurePath = 'src/test/resources/features'
 
 
@@ -15,15 +11,22 @@ repositories {
     mavenCentral()
 }
 
+def groups = [jackson: 'com.fasterxml.jackson.core']
+def versions = [jackson : '2.10.2', cucumber : '4.8.1', log4j2 : '2.12.1', snakeyml : '1.25']
+
 dependencies {
     //we will use the Groovy version that ships with Gradle:
     implementation localGroovy()
-    testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: "$versions.cucumber"
+    testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: "${versions.cucumber}"
     //testCompile group: 'io.cucumber', name: 'cucumber-testng', version: "$versions.cucumber"
-    testImplementation group: 'io.cucumber', name: 'cucumber-java8', version: "$versions.cucumber"
-    testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: "$versions.cucumber"
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: "$versions.log4j2"
-    compile group: 'org.yaml', name: 'snakeyaml', version: "$versions.snakeyml"
+    testImplementation group: 'io.cucumber', name: 'cucumber-java8', version: "${versions.cucumber}"
+    testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: "${versions.cucumber}"
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${versions.log4j2}"
+    compile group: 'org.yaml', name: 'snakeyaml', version: "${versions.snakeyml}"
+    compile group: "${groups.jackson}", name: 'jackson-core', version: "${versions.jackson}"
+    compile group: "${groups.jackson}", name: 'jackson-databind', version: "${versions.jackson}"
+    compile group: "${groups.jackson}", name: 'jackson-annotations', version: "${versions.jackson}"
+
 }
 
 configurations {
@@ -36,6 +39,8 @@ ext.setUpArgs = {
     def prefix = prefix as String
     def execType = (execType as String).toLowerCase()
     def tags = (tags as String).toLowerCase()
+    System.setProperty('userName', userName as String)
+    System.setProperty('password', password as String)
 
     cucumberArgs.addAll(["$featurePath/$execType", '--tags', tags])
 
@@ -76,6 +81,7 @@ task cucumber(dependsOn:setupEnv) {
             main = "io.cucumber.core.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = cucumberArgs
+            systemProperties System.properties
         }
     }
 }

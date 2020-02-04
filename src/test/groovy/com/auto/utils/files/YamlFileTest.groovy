@@ -2,21 +2,39 @@ package com.auto.utils.files
 
 import com.auto.entities.EnvInfo
 import com.auto.utils.Constants
+import org.junit.Before
 
 class YamlFileTest extends GroovyTestCase {
 
+    private String path
+    private Class<?> aClass
+    private YamlFile reader
 
-    void testLoadYamlFileAsObject() {
+
+    @Before
+    void setUp() {
         // Given
-        final String path = Constants.ENV_INFO_PATH
-        final Class<?> aClass = EnvInfo.class
+        path = Constants.ENV_INFO_PATH
+        aClass = EnvInfo.class
 
         // When
-        YamlFile reader = new YamlFile()
+        reader = new YamlFile()
+    }
+
+    void testLoadYamlFileAsObject() {
+
+        // When
         Object envInfo =  reader.loadYamlFileAsObject(aClass, path)
 
         // Then
         assertEquals("The output is not the same class", aClass, envInfo.getClass())
+    }
 
+    void testLoadYamlFileAttributes() {
+        //When
+        EnvInfo envInfo = (EnvInfo) reader.loadYamlFileAsObject(aClass, path)
+        envInfo.setInit()
+        println("---------------->" + envInfo.api.token)
+        println("---------------->" + envInfo.api.getUrl())
     }
 }

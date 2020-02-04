@@ -1,4 +1,4 @@
-package com.auto.steps;
+package com.auto.api.steps;
 
 import io.cucumber.java8.En;
 import org.apache.logging.log4j.LogManager;
