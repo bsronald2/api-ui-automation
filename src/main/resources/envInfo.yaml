@@ -4,5 +4,8 @@ user:
   userName: "r.butron.projects@gmail.com"
   password: "Control123!"
 api:
-  url: "http://todo.ly/API"
-  token: ""
+  url: "http://todo.ly/api"
+  authentication:
+    token: "<token_generated>"
+    userMail: "user.mail@example.com"
+    expirationDate: "2019-01-01"

@@ -11,13 +11,10 @@ class EnvInfo {
 
 
     public void setInit() {
-        println "Set INIT()--------------->"
-        Properties p = System.getProperties();
-        p.list(System.out);
         user.setUserName(System.getProperty("userName"))
         user.setPassword(System.getProperty("password"))
-        AuthTodoLy authTodoLy = new AuthTodoLy(user)
-        api.setToken("")
-
+        AuthTodoLy authTodoLy = new AuthTodoLy(this)
+        authTodoLy.requestAuthToken()
+        api.setAuthentication(authTodoLy.getAuth())
     }
 }

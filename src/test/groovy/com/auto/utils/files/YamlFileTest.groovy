@@ -29,12 +29,4 @@ class YamlFileTest extends GroovyTestCase {
         // Then
         assertEquals("The output is not the same class", aClass, envInfo.getClass())
     }
-
-    void testLoadYamlFileAttributes() {
-        //When
-        EnvInfo envInfo = (EnvInfo) reader.loadYamlFileAsObject(aClass, path)
-        envInfo.setInit()
-        println("---------------->" + envInfo.api.token)
-        println("---------------->" + envInfo.api.getUrl())
-    }
 }

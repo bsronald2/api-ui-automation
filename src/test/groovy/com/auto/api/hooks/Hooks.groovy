@@ -9,19 +9,18 @@ import org.junit.After
 
 
 class Hooks {
-    public static final int SET_UP_ENV_FLAG = 0
+    public static int SET_UP_ENV_FLAG = 0
 
     @Before
     public static void setup(Scenario scenario) {
-        println("-------------------->")
         if(SET_UP_ENV_FLAG == 0) {
             // Read credentials
             YamlFile reader = new YamlFile()
             EnvInfo envInfo = (EnvInfo) reader.loadYamlFileAsObject(EnvInfo.class, Constants.ENV_INFO_PATH)
             envInfo.setInit()
+            SET_UP_ENV_FLAG = 1;
         }
     }
-
 
     @After
     public static void tearDown() {
