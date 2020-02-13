@@ -1,19 +1,27 @@
 package com.auto.api.methods.auth
 
+import com.auto.entities.EnvInfo
 import com.auto.entities.User
-import com.auto.entities.api.Token
+import com.auto.entities.api.Authentication
 
 class AuthTodoLy {
 
     private User user
+    private String endpoint
+    private Authentication auth
 
-    AuthTodoLy(User user) {
-        this.user = user
-        println(user.userName)
-        println user.password
+    AuthTodoLy(EnvInfo envInfo) {
+        this.user = envInfo.user
+        this.endpoint = "${envInfo.api.url}/authentication/token.json"
     }
 
-    public Token getToken() {
+    public Authentication getAuth() {
+        return auth
+
+    }
+
+    public void requestAuthToken() {
+
 
     }
 }
