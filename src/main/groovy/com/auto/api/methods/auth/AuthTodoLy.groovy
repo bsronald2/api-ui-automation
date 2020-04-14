@@ -5,7 +5,6 @@ import com.auto.entities.User
 import com.auto.entities.Authentication
 import io.restassured.response.Response
 import org.apache.http.HttpStatus
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 class AuthTodoLy extends APICall {
 
@@ -17,21 +16,21 @@ class AuthTodoLy extends APICall {
     AuthTodoLy() {
         super(envInfo.url)
         this.user = envInfo.user
-        this.endpoint = "${envInfo.url}/api/authentication/token.json"
+        this.endpoint = "${envInfo.url}/api/authentication/token"
     }
 
     public Authentication getAuth() {
         return auth
     }
 
-    public void getToken() {
-
-    }
-
+    /**
+     * This method request token authentication.
+     * and save as entity
+     */
     public void basicAuth() {
         // Given
         Map requestParams = [
-                endPoint: "/api/authentication/token.json",
+                endPoint: "/api/authentication/token",
                 httpMethod: HTTP_METHODS.GET,
                 basicAuth : [
                         userName: this.user.getUserName(),
@@ -46,16 +45,13 @@ class AuthTodoLy extends APICall {
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
 
-        Map<String, String> map = new ObjectMapper().readValue(response.body.asString(), Map.class);
-        envInfo.setAPIAuth(map)
-    }
+        // Parse response to object
+        Authentication auth = parseOToObject(response.body.asString(), Authentication.class) as Authentication
 
+        envInfo.setAPIAuth(auth)
+    }
 
     public void setAuth(Authentication auth) {
         this.auth = auth
-    }
-
-    public void isAuthenticate() {
-
     }
 }

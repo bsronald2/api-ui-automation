@@ -1,5 +1,6 @@
 package com.auto.api.client.rest
 
+import com.auto.api.client.ClientInfo
 import com.auto.api.client.IAPIClient
 import io.restassured.http.ContentType
 import io.restassured.path.json.JsonPath
@@ -8,7 +9,7 @@ import io.restassured.RestAssured
 import static io.restassured.RestAssured.given
 
 
-class RestAPIClient implements IAPIClient {
+class RestAPIClient extends ClientInfo implements IAPIClient {
 
     private ContentType contentType
     private Response response
@@ -83,7 +84,7 @@ class RestAPIClient implements IAPIClient {
                 .preemptive()
                 .basic(requestBody.userName as String, requestBody.password as String)
                 .when()
-                .get(endPoint)
+                .get(endPoint + ".${requestType}")
 
         return response
     }

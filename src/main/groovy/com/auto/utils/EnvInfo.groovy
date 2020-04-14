@@ -19,10 +19,8 @@ class EnvInfo {
         user.setPassword(System.getProperty("password"))
     }
 
-    public setAPIAuth(Map auth) {
-        api.authentication.tokenString = auth.TokenString
-        api.authentication.expirationTime = auth.ExpirationTime
-        api.authentication.userMail = auth.UserEmail
+    public setAPIAuth(Authentication auth) {
+        api.authentication = auth
     }
 
     public void setAuth(Authentication auth) {

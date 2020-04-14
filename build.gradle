@@ -26,6 +26,7 @@ dependencies {
     compile group: "${groups.jackson}", name: 'jackson-core', version: "${versions.jackson}"
     compile group: "${groups.jackson}", name: 'jackson-databind', version: "${versions.jackson}"
     compile group: "${groups.jackson}", name: 'jackson-annotations', version: "${versions.jackson}"
+    compile group: "com.fasterxml.jackson.dataformat", name: 'jackson-dataformat-xml', version: "${versions.jackson}"
     compile group: 'io.rest-assured', name: 'rest-assured', version: "${versions.restassured}"
 
 }
@@ -40,6 +41,7 @@ ext.setUpArgs = {
     def prefix = prefix as String
     def execType = (execType as String).toLowerCase()
     def tags = (tags as String).toLowerCase()
+    def requestType = (requestType as String).toLowerCase()
     System.setProperty('userName', userName as String)
     System.setProperty('password', password as String)
 
@@ -57,6 +59,7 @@ ext.setUpArgs = {
     propertyF.setProperty("PREFIX", prefix)
     propertyF.setProperty("TAGS", tags)
     propertyF.setProperty("EXEC_TYPE", execType)
+    propertyF.setProperty("REQUEST_TYPE", requestType)
 
     propertyF.store(output, null)
     output.close()

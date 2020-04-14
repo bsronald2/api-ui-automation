@@ -14,5 +14,10 @@ class Constants {
     public static final String ENV_NAME = "ENV_NAME"
     public static final String CONFIG_PROP_PATH = "${UTILS_PATH}/main/resources/config.properties"
     public static final String ENV_INFO_PATH = "${UTILS_PATH}/main/resources/envInfo.yaml"
-    //home/ronald/IdeaProjects/automation_demo/src/main/resources/envInfo.yaml
+
+    /*Configuration File */
+    public static final String EXEC__TYPE = "EXEC_TYPE"
+    public static final String REQUEST__TYPE = "REQUEST_TYPE"
+    public static final String PREFIX = "PREFIX"
+    public static final String TAGS = "TAGS"
 }
