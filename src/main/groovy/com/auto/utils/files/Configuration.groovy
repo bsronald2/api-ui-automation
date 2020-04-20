@@ -8,9 +8,6 @@ import com.auto.utils.Constants
 class Configuration {
 
 
-    // the configuration file is stored in the root of the class path as a .properties file
-//    private static final String CONFIGURATION_FILE = Constants.CONFIG_PROP_PATH
-
     private static final Properties properties;
 
     // use static initializer to read the configuration file when the class is loaded

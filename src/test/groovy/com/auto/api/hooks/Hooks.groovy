@@ -2,8 +2,7 @@ package com.auto.api.hooks
 
 import com.auto.api.methods.auth.AuthTodoLy
 import com.auto.utils.CredentialHandler
-
-
+import com.auto.utils.EntityManager
 import io.cucumber.core.api.Scenario
 import io.cucumber.java.Before
 import org.junit.After
@@ -11,6 +10,11 @@ import org.junit.After
 
 public class Hooks {
     public static int SET_UP_ENV_FLAG = 1
+    private EntityManager entityManager
+    public Hooks(EntityManager entityManager) {
+        this.entityManager = entityManager
+        println this.entityManager
+    }
 
     @Before
     public void setup(Scenario scenario) {

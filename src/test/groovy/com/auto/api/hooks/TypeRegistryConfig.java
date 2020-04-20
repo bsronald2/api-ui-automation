@@ -2,7 +2,9 @@ package com.auto.api.hooks;
 
 import static java.util.Locale.ENGLISH;
 
-import com.auto.api.entities.UserAPI;
+
+import com.auto.api.entities.user.UserRequest;
+import com.auto.api.entities.user.UserResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.core.api.TypeRegistry;
 import io.cucumber.core.api.TypeRegistryConfigurer;
@@ -28,7 +30,8 @@ public class TypeRegistryConfig implements TypeRegistryConfigurer {
 
     @Override
     public void configureTypeRegistry(TypeRegistry typeRegistry) {
-        typeRegistry.defineDataTableType(DataTableType.entry(UserAPI.class));
+        typeRegistry.defineDataTableType(DataTableType.entry(UserRequest.class));
+        typeRegistry.defineDataTableType(DataTableType.entry(UserResponse.class));
         // add another ...
     }
 }

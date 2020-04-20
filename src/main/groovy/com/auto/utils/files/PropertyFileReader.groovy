@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 
 class PropertyFileReader {
-    private final static Logger logger = LogManager.getLogger(PropertyFileReader.class);
+    private final static Logger logger = LogManager.getLogger(PropertyFileReader.class)
 
     private Properties prop
     private InputStream input

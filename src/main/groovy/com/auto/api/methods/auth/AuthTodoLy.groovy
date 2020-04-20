@@ -4,7 +4,6 @@ import com.auto.api.client.APICall
 import com.auto.entities.User
 import com.auto.entities.Authentication
 import io.restassured.response.Response
-import org.apache.http.HttpStatus
 
 class AuthTodoLy extends APICall {
 
@@ -16,7 +15,7 @@ class AuthTodoLy extends APICall {
     AuthTodoLy() {
         super(envInfo.url)
         this.user = envInfo.user
-        this.endpoint = "${envInfo.url}/api/authentication/token"
+        this.endpoint = "/api/authentication/token"
     }
 
     public Authentication getAuth() {
@@ -30,11 +29,15 @@ class AuthTodoLy extends APICall {
     public void basicAuth() {
         // Given
         Map requestParams = [
-                endPoint: "/api/authentication/token",
-                httpMethod: HTTP_METHODS.GET,
-                basicAuth : [
-                        userName: this.user.getUserName(),
-                        password: this.user.getPassword()]
+                endPoint: this.endpoint,
+                httpMethod: GET,
+                header: [
+                        auth: [
+                                userName: this.user.getUserName(),
+                                password: this.user.getPassword()
+                        ]
+                ],
+                basicAuth : ""
         ]
 
         // When
@@ -43,7 +46,7 @@ class AuthTodoLy extends APICall {
         // Then
         response.then()
                 .assertThat()
-                .statusCode(HttpStatus.SC_OK)
+                .statusCode(SC_OK)
 
         // Parse response to object
         Authentication auth = parseOToObject(response.body.asString(), Authentication.class) as Authentication

@@ -1,21 +1,17 @@
 package com.auto.api.client
 
+import com.auto.api.client.rest.Format
+import com.auto.api.client.rest.HttpMethods
 import com.auto.api.client.rest.RestAPIClient
-import com.auto.entities.Authentication
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
+import org.apache.http.HttpStatus
 
-abstract class APICall extends ClientInfo {
+abstract class APICall extends ClientInfo implements HttpStatus, HttpMethods, Format {
 
     protected IAPIClient client
     protected String format
 
-    enum HTTP_METHODS {
-        POST,
-        GET,
-        DELETE,
-        PUT
-    }
 
     APICall(String url) {
         client = new RestAPIClient(url)
@@ -36,9 +32,9 @@ abstract class APICall extends ClientInfo {
     protected Object parseOToObject(String responseBody, Class<?> aClass) {
 
         switch (requestType) {
-            case "json":
+            case JSON:
                 return new ObjectMapper().readValue(responseBody, aClass)
-            case "xml":
+            case XML:
                 XmlMapper xmlMapper = new XmlMapper();
                 return xmlMapper.readValue(responseBody, aClass)
         }

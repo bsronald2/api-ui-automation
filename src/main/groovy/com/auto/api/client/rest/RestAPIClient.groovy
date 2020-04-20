@@ -1,73 +1,71 @@
 package com.auto.api.client.rest
 
+import com.auto.api.client.APICall
 import com.auto.api.client.ClientInfo
 import com.auto.api.client.IAPIClient
 import io.restassured.http.ContentType
-import io.restassured.path.json.JsonPath
 import io.restassured.response.Response
 import io.restassured.RestAssured
 import static io.restassured.RestAssured.given
 
 
-class RestAPIClient extends ClientInfo implements IAPIClient {
+class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
 
     private ContentType contentType
     private Response response
-    private Map requestBody
+    private String requestBody
     private String httpMethod
     private String endPoint
+    private String token
+    private Map auth
 
     public RestAPIClient(String url) {
         RestAssured.baseURI = url
         RestAssured.useRelaxedHTTPSValidation()
+        this.token = envInfo.api.authentication.tokenString
 
     }
 
     @Override
     Response request(String APIMethod, Map params) {
         init(APIMethod, params)
-
-        if (APIMethod == "GET") {
-            get()
+        switch (this.httpMethod) {
+            case GET:
+                return get()
+            case POST:
+                return post()
+                break
+            case PUT:
+                break
+            case DELETE:
+                break
         }
 
         return null
 
     }
 
-    private void get() {
+    private Response post() {
+        response = given()
+                  .header("Token", this.token)
+                  .log().method()
+                  .log().body()
+                      .body(requestBody)
+                  .when()
+                  .post("${this.endPoint}.${requestType}")
 
+        return response
     }
-//        response = RestAssured.given()
-//                .auth()
-//                .preemptive()
-//                .basic(requestBody.userName as String, requestBody.password as String)
-//                .when()
-//                .get("/")
-//
-//        return response
 
-//        println response.getContentType()
-//        println response.getStatusCode()
-
-
-//        println response.getContentType()
-//        println response.getStatusCode()
-//        println(response.body.asString())
-//        println "----------------"
-//        String token = jsonPath.get("TokenString") as String
-//        println token
-//        response = RestAssured.given()
-//                  .header("Token", token)
-////                .auth()
-////                .preemptive()
-////                .basic(requestBody.userName as String, requestBody.password as String)
-//                .when()
-//                .get("api/projects.json")
-//        println response.getContentType()
-//        println response.getStatusCode()
-//        println(response.body.asString())
-
+    private Response get() {
+        response = given()
+                .header("Token", this.token)
+                .log().method()
+                .log().body()
+                .log().uri()
+                .when()
+                .get("${this.endPoint}.${requestType}")
+    }
 
     /**
      * This method request token authentication.
@@ -82,7 +80,7 @@ class RestAPIClient extends ClientInfo implements IAPIClient {
         response = given()
                 .auth()
                 .preemptive()
-                .basic(requestBody.userName as String, requestBody.password as String)
+                .basic(auth.userName as String, auth.password as String)
                 .when()
                 .get(endPoint + ".${requestType}")
 
@@ -93,5 +91,9 @@ class RestAPIClient extends ClientInfo implements IAPIClient {
         httpMethod = params.httpMethod
         requestBody = params."${APIMethod}"
         endPoint = params.endPoint
+        if (params.header != null) {
+            auth = params.header.auth
+        }
+
     }
 }
