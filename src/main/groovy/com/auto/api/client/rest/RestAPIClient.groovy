@@ -6,6 +6,8 @@ import com.auto.api.client.IAPIClient
 import io.restassured.http.ContentType
 import io.restassured.response.Response
 import io.restassured.RestAssured
+import io.restassured.specification.RequestSpecification
+
 import static io.restassured.RestAssured.given
 
 
@@ -18,6 +20,7 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
     private String endPoint
     private String token
     private Map auth
+    private RequestSpecification request
 
     public RestAPIClient(String url) {
         RestAssured.baseURI = url
@@ -38,19 +41,24 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
             case PUT:
                 break
             case DELETE:
+                return delete()
                 break
         }
 
         return null
+    }
 
+    private Response delete() {
+        response = request
+                .when()
+                .delete("${this.endPoint}.${requestType}")
+
+        return response
     }
 
     private Response post() {
-        response = given()
-                  .header("Token", this.token)
-                  .log().method()
-                  .log().body()
-                      .body(requestBody)
+        response = request
+                  .body(requestBody)
                   .when()
                   .post("${this.endPoint}.${requestType}")
 
@@ -58,14 +66,14 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
     }
 
     private Response get() {
-        response = given()
-                .header("Token", this.token)
-                .log().method()
-                .log().body()
-                .log().uri()
+        response = request
                 .when()
                 .get("${this.endPoint}.${requestType}")
+
+        return response
     }
+
+
 
     /**
      * This method request token authentication.
@@ -77,10 +85,7 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
     @Override
     Response requestAuth(String APIMethod, Map params) {
         init(APIMethod, params)
-        response = given()
-                .auth()
-                .preemptive()
-                .basic(auth.userName as String, auth.password as String)
+        response = request
                 .when()
                 .get(endPoint + ".${requestType}")
 
@@ -91,9 +96,21 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
         httpMethod = params.httpMethod
         requestBody = params."${APIMethod}"
         endPoint = params.endPoint
+        setRequest(params)
+    }
+
+    void setRequest(Map params) {
         if (params.header != null) {
             auth = params.header.auth
+            request = given()
+                    .auth()
+                    .preemptive()
+                    .basic(auth.userName as String, auth.password as String)
+        } else {
+            request = given()
+                    .header("Token", this.token)
+                    .log().method()
+                    .log().body()
         }
-
     }
 }

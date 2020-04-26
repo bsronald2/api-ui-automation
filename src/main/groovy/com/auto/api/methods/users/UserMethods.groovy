@@ -15,7 +15,7 @@ class UserMethods extends APICall {
         this.endpoint = "api/user"
     }
 
-    public void createUser(UserRequest userRequest) {
+    public Tuple2<UserResponse, Response> createUser(UserRequest userRequest) {
         // Given
         Map requestParams = [
                 endPoint: this.endpoint,
@@ -29,10 +29,11 @@ class UserMethods extends APICall {
         println "Response Body: ${response.body.asString()}"
 
         UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
-        println(userResponse.asMap())
+
+        new Tuple2<>(userResponse, response)
     }
 
-    public Tuple2<UserResponse, Response> getUser() {
+    public Tuple2<UserResponse, Response> getUser(Map credentials = null) {
 
         // Given
         Map requestParams = [
@@ -41,10 +42,42 @@ class UserMethods extends APICall {
                 getUser : null
         ]
 
+        if (credentials) { // if credentials are null then use token
+            requestParams << [ header: [
+                    auth: [
+                            userName: credentials.Email,
+                            password: credentials.Password
+                    ]
+                ]
+            ]
+        }
+
         // When
         Response response = client.request("getUser", requestParams)
 
         // Then
+        UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
+
+        return new Tuple2<>(userResponse, response)
+    }
+
+    public Tuple2<UserResponse, Response> deleteUser(Map credentials = null) {
+        // Given
+        Map requestParams = [
+                endPoint: "${this.endpoint}/0",
+                httpMethod: DELETE,
+                header: [
+                        auth: [
+                                userName: credentials.Email,
+                                password: credentials.Password
+                        ]
+                ],
+                deleteUser : null
+        ]
+
+        // When
+        Response response = client.request("deleteUser", requestParams)
+
         UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
 
         return new Tuple2<>(userResponse, response)

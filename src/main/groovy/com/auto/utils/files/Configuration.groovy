@@ -13,7 +13,6 @@ class Configuration {
     // use static initializer to read the configuration file when the class is loaded
     static {
         properties = new Properties()
-        println "I am here..."
         try {
             FileInputStream inputStream = new FileInputStream(Constants.CONFIG_PROP_PATH)
             properties.load(inputStream)

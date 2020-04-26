@@ -50,10 +50,8 @@ class UserResponse extends ObjectAttributes {
         UserResponse that = (UserResponse) o
 
         if (addItemMoreExpanded != that.addItemMoreExpanded) return false
-        if (defaultProjectId != that.defaultProjectId) return false
         if (editDueDateMoreExpanded != that.editDueDateMoreExpanded) return false
         if (firstDayOfWeek != that.firstDayOfWeek) return false
-        if (id != that.id) return false
         if (isProUser != that.isProUser) return false
         if (listSortType != that.listSortType) return false
         if (newTaskDueDate != that.newTaskDueDate) return false
@@ -65,11 +63,9 @@ class UserResponse extends ObjectAttributes {
     }
 
     int hashCode() {
-        int result
-        result = id
+        int result = 0
         result = 31 * result + email.hashCode()
         result = 31 * result + fullName.hashCode()
-        result = 31 * result + defaultProjectId
         result = 31 * result + (editDueDateMoreExpanded ? 1 : 0)
         result = 31 * result + listSortType
         result = 31 * result + (int) firstDayOfWeek
@@ -77,6 +73,7 @@ class UserResponse extends ObjectAttributes {
         result = 31 * result + timeZone
         result = 31 * result + (isProUser ? 1 : 0)
         result = 31 * result + (addItemMoreExpanded ? 1 : 0)
+
         return result
     }
 }
