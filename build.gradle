@@ -2,21 +2,32 @@ apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'idea'
 
+def cucumberArgs = ['--plugin', 'pretty', '--glue', 'com.auto.api']
+def featurePath = 'src/test/resources/features'
 
-def versions = [ cucumber : '4.8.1' ]
+
 
 repositories {
     mavenCentral()
 }
 
+def groups = [jackson: 'com.fasterxml.jackson.core']
+def versions = [jackson : '2.10.2', cucumber : '4.8.1', log4j2 : '2.12.1', snakeyml : '1.25', restassured: '4.2.0']
+
 dependencies {
     //we will use the Groovy version that ships with Gradle:
     implementation localGroovy()
-    testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: "$versions.cucumber"
+    testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: "${versions.cucumber}"
     //testCompile group: 'io.cucumber', name: 'cucumber-testng', version: "$versions.cucumber"
-    testImplementation group: 'io.cucumber', name: 'cucumber-java8', version: "$versions.cucumber"
-    testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: "$versions.cucumber"
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.1'
+    testImplementation group: 'io.cucumber', name: 'cucumber-java8', version: "${versions.cucumber}"
+    testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: "${versions.cucumber}"
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${versions.log4j2}"
+    compile group: 'org.yaml', name: 'snakeyaml', version: "${versions.snakeyml}"
+    compile group: "${groups.jackson}", name: 'jackson-core', version: "${versions.jackson}"
+    compile group: "${groups.jackson}", name: 'jackson-databind', version: "${versions.jackson}"
+    compile group: "${groups.jackson}", name: 'jackson-annotations', version: "${versions.jackson}"
+    compile group: "com.fasterxml.jackson.dataformat", name: 'jackson-dataformat-xml', version: "${versions.jackson}"
+    compile group: 'io.rest-assured', name: 'rest-assured', version: "${versions.restassured}"
 
 }
 
@@ -26,11 +37,45 @@ configurations {
     }
 }
 
-task setupEnv {
+ext.setUpArgs = {
+    def prefix = prefix as String
+    def execType = (execType as String).toLowerCase()
+    def tags = (tags as String).toLowerCase()
+    def requestType = (requestType as String).toLowerCase()
+    System.setProperty('userName', userName as String)
+    System.setProperty('password', password as String)
+
+    cucumberArgs.addAll(["$featurePath/$execType", '--tags', tags])
+
+    // Save Args into properties file
+    def file = new File(configPath)
+    if (file.exists())
+        file.delete()
+    file.createNewFile()
+
+    def propertyF = new Properties()
+    OutputStream output = new FileOutputStream(configPath)
+
+    propertyF.setProperty("PREFIX", prefix)
+    propertyF.setProperty("TAGS", tags)
+    propertyF.setProperty("EXEC_TYPE", execType)
+    propertyF.setProperty("REQUEST_TYPE", requestType)
+
+    propertyF.store(output, null)
+    output.close()
+
+}
+
+task setupEnv() {
     // Create directory if doesn't exist
     File reportLogs = new File("logs/") // log files
     if (!reportLogs.exists())
         reportLogs.mkdir()
+
+    setUpArgs()
+    // TODO clean logs directory
+    // Save input args config.properties file
+    // Reader -> Properties and YML files
 }
 
 task cucumber(dependsOn:setupEnv) {
@@ -39,7 +84,8 @@ task cucumber(dependsOn:setupEnv) {
         javaexec {
             main = "io.cucumber.core.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ['--plugin', 'pretty', '--glue', 'com.auto.steps', 'src/test/resources/features']
+            args = cucumberArgs
+            systemProperties System.properties
         }
     }
 }
