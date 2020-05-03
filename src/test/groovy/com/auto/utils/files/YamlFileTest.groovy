@@ -1,6 +1,6 @@
 package com.auto.utils.files
 
-import com.auto.entities.EnvInfo
+import com.auto.utils.EnvInfo
 import com.auto.utils.Constants
 import org.junit.Before
 

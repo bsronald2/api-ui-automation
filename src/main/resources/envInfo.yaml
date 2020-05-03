@@ -1,11 +1,11 @@
 version: 1
 id: "demo"
+url: "http://todo.ly"
 user:
-  userName: "r.butron.projects@gmail.com"
-  password: "Control123!"
+  userName: "userName"
+  password: "pass"
 api:
-  url: "http://todo.ly/api"
   authentication:
-    token: "<token_generated>"
+    tokenString: "<token_generated>"
     userMail: "user.mail@example.com"
-    expirationDate: "2019-01-01"
+    expirationTime: "2019-01-01"

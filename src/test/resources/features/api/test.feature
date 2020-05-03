@@ -5,6 +5,6 @@ Feature: Testing Cucumber
   Scenario: Test
     Given I print something "test api"
 
-  @ui
-  Scenario: Test
-    Given I print something "test ui"
+#  @ui
+#  Scenario: Test
+#    Given I print something "test ui"

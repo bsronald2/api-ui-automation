@@ -1,29 +1,43 @@
 package com.auto.api.hooks
 
-import com.auto.entities.EnvInfo
-import com.auto.utils.Constants
-import com.auto.utils.files.YamlFile
+import com.auto.api.methods.auth.AuthTodoLy
+import com.auto.api.methods.users.UserMethods
+import com.auto.utils.CredentialHandler
+import com.auto.utils.EntityManager
 import io.cucumber.core.api.Scenario
+import io.cucumber.java.After
 import io.cucumber.java.Before
-import org.junit.After
 
 
-class Hooks {
-    public static int SET_UP_ENV_FLAG = 0
+
+public class Hooks {
+    public static int SET_UP_ENV_FLAG = 1
+    private EntityManager entityManager
+    public Hooks(EntityManager entityManager) {
+        this.entityManager = entityManager
+    }
 
     @Before
-    public static void setup(Scenario scenario) {
-        if(SET_UP_ENV_FLAG == 0) {
-            // Read credentials
-            YamlFile reader = new YamlFile()
-            EnvInfo envInfo = (EnvInfo) reader.loadYamlFileAsObject(EnvInfo.class, Constants.ENV_INFO_PATH)
-            envInfo.setInit()
-            SET_UP_ENV_FLAG = 1;
+    public void setup(Scenario scenario) {
+        if(SET_UP_ENV_FLAG) { // JUST ONCE
+            AuthTodoLy authTodoLy = new AuthTodoLy()
+            authTodoLy.basicAuth()
+            SET_UP_ENV_FLAG = 0;
         }
     }
 
-    @After
-    public static void tearDown() {
+//    @After
+//    public void tearDown() {
+//
+//    }
 
+    @After("@deleteUser and not @NotDeleteUser")
+    public void doSomethingAfter(Scenario scenario){
+        Map objects = this.entityManager.filterByObjectType("_AUTH")
+
+        UserMethods userMethods = new UserMethods();
+        objects.each {k,v ->
+            userMethods.deleteUser(v as Map)
+        }
     }
 }
