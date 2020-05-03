@@ -34,7 +34,6 @@ class EntityManager {
 
         for (Map.Entry<String, Object> entity : entities.entrySet()) {
             if (entity.getKey().contains(objectType)) {
-                println entity.getValue()
                 result.put(entity.getKey(), entity.getValue())
             }
         }

@@ -15,7 +15,6 @@ public class Hooks {
     private EntityManager entityManager
     public Hooks(EntityManager entityManager) {
         this.entityManager = entityManager
-        println this.entityManager
     }
 
     @Before

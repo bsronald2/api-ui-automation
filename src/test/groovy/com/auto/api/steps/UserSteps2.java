@@ -36,8 +36,6 @@ public class UserSteps2 implements CucumberConstants {
         userMethods = new UserMethods();
         users.forEach((k, v) -> {
             userMethods.createUser(v);
-            System.out.println(v.asMap());
-
         });
     }
 
@@ -79,6 +77,8 @@ public class UserSteps2 implements CucumberConstants {
         for (Map.Entry<String, UserRequest> entry : users.entrySet()) {
             Tuple2<UserResponse, Response> tuple2 = userMethods.createUser(entry.getValue());
             userCredentials = entry.getValue().asMap();
+            this.response = tuple2.getSecond();
+            this.entityManager.put(RESPONSE, tuple2.getSecond());
             this.entityManager.put(entry.getKey(), tuple2.getFirst());
             this.entityManager.put(entry.getKey() + "_AUTH", userCredentials);
         }

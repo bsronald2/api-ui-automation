@@ -25,9 +25,6 @@ class UserMethods extends APICall {
 
         // When
         Response response = client.request("createUser", requestParams)
-        println("Response Header: ${response.getHeaders().toString()}")
-        println "Response Body: ${response.body.asString()}"
-
         UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
 
         new Tuple2<>(userResponse, response)
