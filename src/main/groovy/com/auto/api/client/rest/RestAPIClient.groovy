@@ -37,12 +37,10 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
                 return get()
             case POST:
                 return post()
-                break
             case PUT:
-                break
+                return put()
             case DELETE:
                 return delete()
-                break
         }
 
         return null
@@ -65,6 +63,15 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
         return response
     }
 
+    private Response put() {
+        response = request
+                .body(requestBody)
+                .when()
+                .put("${this.endPoint}.${requestType}")
+
+        return response
+    }
+
     private Response get() {
         response = request
                 .when()
@@ -72,8 +79,6 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
 
         return response
     }
-
-
 
     /**
      * This method request token authentication.
@@ -99,6 +104,11 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
         setRequest(params)
     }
 
+    /**
+     * Set request authentication.
+     *
+     * @param params i.e. [header: [username: xxxx, password: yyyy]]
+     */
     void setRequest(Map params) {
         if (params.header != null) {
             auth = params.header.auth

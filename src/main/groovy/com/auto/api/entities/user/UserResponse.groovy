@@ -4,10 +4,12 @@ import com.auto.entities.ObjectAttributes
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement
 import groovy.transform.Immutable
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 //@Immutable ->  override equals and hashcode
+@JacksonXmlRootElement(localName = "UserObject")
 class UserResponse extends ObjectAttributes {
 
     @JsonProperty("Id")
@@ -75,5 +77,9 @@ class UserResponse extends ObjectAttributes {
         result = 31 * result + (addItemMoreExpanded ? 1 : 0)
 
         return result
+    }
+
+    public String toString() {
+        return this.asMap().toString()
     }
 }

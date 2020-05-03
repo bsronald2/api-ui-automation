@@ -57,4 +57,9 @@ class AuthTodoLy extends APICall {
     public void setAuth(Authentication auth) {
         this.auth = auth
     }
+
+    @Override
+    protected Tuple2<?, Response> call(String methodName, Map requestParams) {
+        return null
+    }
 }

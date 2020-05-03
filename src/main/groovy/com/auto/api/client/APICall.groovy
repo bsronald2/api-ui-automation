@@ -5,6 +5,7 @@ import com.auto.api.client.rest.HttpMethods
 import com.auto.api.client.rest.RestAPIClient
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
+import io.restassured.response.Response
 import org.apache.http.HttpStatus
 
 abstract class APICall extends ClientInfo implements HttpStatus, HttpMethods, Format {
@@ -17,10 +18,7 @@ abstract class APICall extends ClientInfo implements HttpStatus, HttpMethods, Fo
         client = new RestAPIClient(url)
     }
 
-    protected Object request(String APIMethod, Map params) {
-        client.request(APIMethod, params)
-        return null
-    }
+    abstract protected Tuple2<?, Response> call(String methodName, Map requestParams)
 
     /**
      * Parse response body (xml or json) to an Object.
@@ -30,7 +28,6 @@ abstract class APICall extends ClientInfo implements HttpStatus, HttpMethods, Fo
      * @return response body as object
      */
     protected Object parseOToObject(String responseBody, Class<?> aClass) {
-
         switch (requestType) {
             case JSON:
                 return new ObjectMapper().readValue(responseBody, aClass)

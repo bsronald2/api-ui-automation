@@ -2,9 +2,12 @@ package com.auto.entities
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.dataformat.xml.XmlMapper
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 
 abstract class ObjectAttributes {
-
+    private final static Logger logger = LogManager.getLogger(ObjectAttributes.class)
 
     /**
      * This method return class field values as map
@@ -22,8 +25,8 @@ abstract class ObjectAttributes {
      * @return fields as map without null objects
      */
     public Map asMapNonNull() {
-        this.class.declaredFields.findAll { (!it.synthetic && (this."$it.name" != null))  }.collectEntries {
-            [ (it.name):this."$it.name" ]
+        this.class.declaredFields.findAll { !it.synthetic && (it.isAnnotationPresent(JsonProperty.class)) && (this."$it.name" != null)}.collectEntries {
+            [ (it.getAnnotation(JsonProperty.class).value()):this."$it.name" ]
         }
     }
 
@@ -32,18 +35,26 @@ abstract class ObjectAttributes {
      *
      * @return attributes as String
      */
-    public String asJsonString() {
-        return new ObjectMapper().writeValueAsString(asMap());
+    public String asJsonString(boolean getNulls) {
+        Map asMapValue = getNulls? asMap() : asMapNonNull()
+        return new ObjectMapper().writeValueAsString(asMapValue);
     }
 
-    public String getFormat(String format) {
+    public String asXMLString(boolean getNulls = true) {
+        XmlMapper xmlMapper = new XmlMapper();
+        return xmlMapper.writeValueAsString(this)
+    }
+
+    public String getFormat(String format, boolean getNulls = true) {
         switch (format) {
             case "json":
-                return asJsonString()
+                return asJsonString(getNulls)
             case "xml":
-                return ""
+                return asXMLString()
 
         }
+        logger.warn("Object was not parsed into $format")
+
         return null
     }
 }

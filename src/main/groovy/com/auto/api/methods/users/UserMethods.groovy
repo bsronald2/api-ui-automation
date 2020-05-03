@@ -25,6 +25,8 @@ class UserMethods extends APICall {
 
         // When
         Response response = client.request("createUser", requestParams)
+
+        //Then
         UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
 
         new Tuple2<>(userResponse, response)
@@ -75,6 +77,39 @@ class UserMethods extends APICall {
         // When
         Response response = client.request("deleteUser", requestParams)
 
+        // Then
+        UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
+
+        return new Tuple2<>(userResponse, response)
+    }
+
+    Tuple2<UserResponse, Response> putUser(UserRequest userRequest, Map credentials = null) {
+        // Given
+        Map requestParams = [
+                endPoint: "${this.endpoint}/0",
+                httpMethod: PUT,
+                putUser : userRequest.getFormat(requestType, false)
+        ]
+
+        if (credentials) { // if credentials are null then use token
+            requestParams << [ header: [
+                    auth: [
+                            userName: credentials.Email,
+                            password: credentials.Password
+                    ]
+            ]
+            ]
+        }
+
+        return call("putUser", requestParams)
+    }
+
+    @Override
+    protected Tuple2<?, Response> call(String methodName, Map requestParams) {
+        // When
+        Response response = client.request(methodName, requestParams)
+
+        // Then
         UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
 
         return new Tuple2<>(userResponse, response)

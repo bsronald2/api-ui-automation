@@ -66,6 +66,8 @@ public class UserSteps2 implements CucumberConstants {
         List<UserResponse> userResponseList = table.asList(UserResponse.class);
         UserResponse actualUser = (UserResponse) this.entityManager.getEntity(user);
         for(UserResponse expectedUser : userResponseList) {
+            System.out.println(expectedUser);
+            System.out.println(actualUser);
             Assert.assertEquals("Users are not equals", expectedUser, actualUser);
         }
     }
@@ -82,5 +84,19 @@ public class UserSteps2 implements CucumberConstants {
             this.entityManager.put(entry.getKey(), tuple2.getFirst());
             this.entityManager.put(entry.getKey() + "_AUTH", userCredentials);
         }
+    }
+
+    @When("I update the following users")
+    public void iUpdate(DataTable table) {
+        Map<String, UserRequest> users = table.asMap(String.class, UserRequest.class);
+        for (Map.Entry<String, UserRequest> entry : users.entrySet()) {
+            userCredentials = (Map<String, String>) this.entityManager.getEntity(entry.getKey() + "_AUTH");
+            Tuple2<UserResponse, Response> tuple2 = userCredentials == null?
+                    userMethods.putUser(entry.getValue()) : userMethods.putUser(entry.getValue(), userCredentials);
+            this.response = tuple2.getSecond();
+            this.entityManager.put(RESPONSE, tuple2.getSecond());
+            this.entityManager.put(entry.getKey(), tuple2.getFirst());
+        }
+
     }
 }
