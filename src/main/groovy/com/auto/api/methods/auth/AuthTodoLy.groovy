@@ -4,13 +4,15 @@ import com.auto.api.client.APICall
 import com.auto.entities.User
 import com.auto.entities.Authentication
 import io.restassured.response.Response
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 
 class AuthTodoLy extends APICall {
 
     private User user
     private String endpoint
     private Authentication auth
-
+    private final static Logger logger = LogManager.getLogger(AuthTodoLy.class)
 
     AuthTodoLy() {
         super(envInfo.url)
@@ -39,7 +41,7 @@ class AuthTodoLy extends APICall {
                 ],
                 basicAuth : ""
         ]
-        println "-------------> $requestParams"
+        logger.error("-------------> $requestParams")
 
         // When
         Response response = client.requestAuth("basicAuth", requestParams)
