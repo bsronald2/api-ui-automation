@@ -42,9 +42,6 @@ ext.setUpArgs = {
     def execType = (execType as String).toLowerCase()
     def tags = (tags as String).toLowerCase()
     def requestType = (requestType as String).toLowerCase()
-    println "-----------------"
-    println userName
-    println password
     System.setProperty('userName', userName as String)
     System.setProperty('password', password as String)
 
