@@ -52,7 +52,7 @@ class AuthTodoLy extends APICall {
                 .statusCode(SC_OK)
 
         logger.error("-------------> ${response.statusCode}")
-        logger.error("-------------> ${response.body.toString()}")
+        logger.error("-------------> ${response.body.asString()}")
 
         // Parse response to object
         Authentication auth = parseOToObject(response.body.asString(), Authentication.class) as Authentication
