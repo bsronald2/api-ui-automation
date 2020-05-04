@@ -39,6 +39,7 @@ class AuthTodoLy extends APICall {
                 ],
                 basicAuth : ""
         ]
+        println "-------------> $requestParams"
 
         // When
         Response response = client.requestAuth("basicAuth", requestParams)
