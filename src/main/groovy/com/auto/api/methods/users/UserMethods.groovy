@@ -4,11 +4,14 @@ import com.auto.api.client.APICall
 import com.auto.api.entities.user.UserRequest
 import com.auto.api.entities.user.UserResponse
 import io.restassured.response.Response
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 
 class UserMethods extends APICall {
 
     private UserResponse userResponse
     private String endpoint
+    private final static Logger logger = LogManager.getLogger(UserMethods.class)
 
     UserMethods() {
         super(envInfo.url)
@@ -23,13 +26,15 @@ class UserMethods extends APICall {
                 createUser : userRequest.getFormat(requestType)
         ]
 
-        // When
-        Response response = client.request("createUser", requestParams)
+//        // When
+//        Response response = client.request("createUser", requestParams)
+//
+//        //Then
+//        UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
+//
+//        new Tuple2<>(userResponse, response)
+        return call("createUser", requestParams)
 
-        //Then
-        UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
-
-        new Tuple2<>(userResponse, response)
     }
 
     public Tuple2<UserResponse, Response> getUser(Map credentials = null) {
@@ -51,13 +56,16 @@ class UserMethods extends APICall {
             ]
         }
 
-        // When
-        Response response = client.request("getUser", requestParams)
+//        // When
+//        Response response = client.request("getUser", requestParams)
+//        println response.statusCode
+//        println response.body.asString()
+//        // Then
+//        UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
+//
+//        return new Tuple2<>(userResponse, response)
+        return call("getUser", requestParams)
 
-        // Then
-        UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
-
-        return new Tuple2<>(userResponse, response)
     }
 
     public Tuple2<UserResponse, Response> deleteUser(Map credentials = null) {
@@ -75,12 +83,16 @@ class UserMethods extends APICall {
         ]
 
         // When
-        Response response = client.request("deleteUser", requestParams)
+//        Response response = client.request("deleteUser", requestParams)
+//        println response.statusCode
+//        println response.body.asString()
+//
+//        // Then
+//        UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
+//
+//        return new Tuple2<>(userResponse, response)
 
-        // Then
-        UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
-
-        return new Tuple2<>(userResponse, response)
+        return call("deleteUser", requestParams)
     }
 
     Tuple2<UserResponse, Response> putUser(UserRequest userRequest, Map credentials = null) {
@@ -111,6 +123,9 @@ class UserMethods extends APICall {
 
         // Then
         UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
+
+        logger.info("Status Code: ${response.statusCode}")
+        logger.info("Response Body:${response.body.asString()}")
 
         return new Tuple2<>(userResponse, response)
     }
