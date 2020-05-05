@@ -26,15 +26,7 @@ class UserMethods extends APICall {
                 createUser : userRequest.getFormat(requestType)
         ]
 
-//        // When
-//        Response response = client.request("createUser", requestParams)
-//
-//        //Then
-//        UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
-//
-//        new Tuple2<>(userResponse, response)
         return call("createUser", requestParams)
-
     }
 
     public Tuple2<UserResponse, Response> getUser(Map credentials = null) {
@@ -56,14 +48,6 @@ class UserMethods extends APICall {
             ]
         }
 
-//        // When
-//        Response response = client.request("getUser", requestParams)
-//        println response.statusCode
-//        println response.body.asString()
-//        // Then
-//        UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
-//
-//        return new Tuple2<>(userResponse, response)
         return call("getUser", requestParams)
 
     }
@@ -81,16 +65,6 @@ class UserMethods extends APICall {
                 ],
                 deleteUser : null
         ]
-
-        // When
-//        Response response = client.request("deleteUser", requestParams)
-//        println response.statusCode
-//        println response.body.asString()
-//
-//        // Then
-//        UserResponse userResponse = parseOToObject(response.body.asString(), UserResponse.class) as UserResponse
-//
-//        return new Tuple2<>(userResponse, response)
 
         return call("deleteUser", requestParams)
     }

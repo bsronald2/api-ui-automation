@@ -117,7 +117,6 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
                     .preemptive()
                     .basic(auth.userName as String, auth.password as String)
         } else {
-            println "--------> T${this.token}"
             request = given()
                     .header("Token", this.token)
                     .log().method()

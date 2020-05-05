@@ -41,7 +41,6 @@ class AuthTodoLy extends APICall {
                 ],
                 basicAuth : ""
         ]
-        logger.error("-------------> $requestParams")
 
         // When
         Response response = client.requestAuth("basicAuth", requestParams)
@@ -50,9 +49,6 @@ class AuthTodoLy extends APICall {
         response.then()
                 .assertThat()
                 .statusCode(SC_OK)
-
-        logger.error("-------------> ${response.statusCode}")
-        logger.error("-------------> ${response.body.asString()}")
 
         // Parse response to object
         Authentication auth = parseOToObject(response.body.asString(), Authentication.class) as Authentication

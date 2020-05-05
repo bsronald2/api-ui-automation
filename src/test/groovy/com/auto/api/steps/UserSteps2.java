@@ -66,8 +66,6 @@ public class UserSteps2 implements CucumberConstants {
         List<UserResponse> userResponseList = table.asList(UserResponse.class);
         UserResponse actualUser = (UserResponse) this.entityManager.getEntity(user);
         for(UserResponse expectedUser : userResponseList) {
-            System.out.println(expectedUser);
-            System.out.println(actualUser);
             Assert.assertEquals("Users are not equals", expectedUser, actualUser);
         }
     }
