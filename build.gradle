@@ -1,8 +1,9 @@
+
 apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'idea'
 
-def cucumberArgs = ['--plugin', 'pretty', '--glue', 'com.auto.api']
+def cucumberArgs = ['--plugin', 'pretty', '--plugin', 'json:report_output/cucumber.json', '--monochrome', '--glue', 'com.auto.api']
 def featurePath = 'src/test/resources/features'
 
 
@@ -67,10 +68,17 @@ ext.setUpArgs = {
 }
 
 task setupEnv() {
-    // Create directory if doesn't exist
+    // Create Log directory if doesn't exist
     File reportLogs = new File("logs/") // log files
     if (!reportLogs.exists())
         reportLogs.mkdir()
+
+    // Create report directory if doesn't exits
+    File reportTest = new File("report_output/") // report_json
+    if (!reportTest.exists())
+        reportTest.mkdir()
+    else
+       delete reportTest.listFiles()
 
     setUpArgs()
     // TODO clean logs directory

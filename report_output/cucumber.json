@@ -1,0 +1,749 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "line": 5,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 3979132385,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I log in with the following user",
+            "match": {
+              "location": "UserSteps2.iLogInWithTheFollowingUser(DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "",
+                  "email",
+                  "fullName",
+                  "password"
+                ]
+              },
+              {
+                "cells": [
+                  "UserA",
+                  "example2@example.com",
+                  "William M",
+                  "M123!"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-05-05T10:41:25.591Z",
+        "before": [
+          {
+            "result": {
+              "duration": 2966959547,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.setup(Scenario)"
+            }
+          }
+        ],
+        "line": 11,
+        "name": "Delete User",
+        "description": "",
+        "id": "testing-user-methods;delete-user",
+        "after": [
+          {
+            "result": {
+              "duration": 573447569,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.doSomethingAfter(Scenario)"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 2892657,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "the status code should be 200",
+            "match": {
+              "arguments": [
+                {
+                  "val": "200",
+                  "offset": 26
+                }
+              ],
+              "location": "CommonSteps.theStatusCodeShouldBe(int)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 25167556,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "\"UserA\" should have the following key-values",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"UserA\"",
+                  "offset": 0
+                }
+              ],
+              "location": "UserSteps2.shouldHaveTheFollowingKeyValues(String,DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "email",
+                  "fullName",
+                  "timeZone",
+                  "isProUser",
+                  "addItemMoreExpanded",
+                  "editDueDateMoreExpanded",
+                  "listSortType",
+                  "firstDayOfWeek",
+                  "newTaskDueDate"
+                ]
+              },
+              {
+                "cells": [
+                  "example2@example.com",
+                  "William M",
+                  "0",
+                  "false",
+                  "false",
+                  "false",
+                  "0",
+                  "0",
+                  "-1"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@user"
+          },
+          {
+            "name": "@smoke"
+          },
+          {
+            "name": "@api"
+          },
+          {
+            "name": "@deleteUser"
+          },
+          {
+            "name": "@Post"
+          }
+        ]
+      },
+      {
+        "line": 5,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 783379592,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I log in with the following user",
+            "match": {
+              "location": "UserSteps2.iLogInWithTheFollowingUser(DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "",
+                  "email",
+                  "fullName",
+                  "password"
+                ]
+              },
+              {
+                "cells": [
+                  "UserA",
+                  "example2@example.com",
+                  "William M",
+                  "M123!"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-05-05T10:41:33.165Z",
+        "before": [
+          {
+            "result": {
+              "duration": 309202,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.setup(Scenario)"
+            }
+          }
+        ],
+        "line": 18,
+        "name": "Delete User",
+        "description": "",
+        "id": "testing-user-methods;delete-user",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 632320653,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "I delete the next users",
+            "match": {
+              "location": "UserSteps2.deleteUser(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "UserA"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2647393,
+              "status": "passed"
+            },
+            "line": 21,
+            "name": "the status code should be 200",
+            "match": {
+              "arguments": [
+                {
+                  "val": "200",
+                  "offset": 26
+                }
+              ],
+              "location": "CommonSteps.theStatusCodeShouldBe(int)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 8721173,
+              "status": "passed"
+            },
+            "line": 22,
+            "name": "\"UserA\" should have the following key-values",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"UserA\"",
+                  "offset": 0
+                }
+              ],
+              "location": "UserSteps2.shouldHaveTheFollowingKeyValues(String,DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "email",
+                  "fullName",
+                  "timeZone",
+                  "isProUser",
+                  "addItemMoreExpanded",
+                  "editDueDateMoreExpanded",
+                  "listSortType",
+                  "firstDayOfWeek",
+                  "newTaskDueDate"
+                ]
+              },
+              {
+                "cells": [
+                  "example2@example.com",
+                  "William M",
+                  "0",
+                  "false",
+                  "false",
+                  "false",
+                  "0",
+                  "0",
+                  "-1"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@user"
+          },
+          {
+            "name": "@smoke"
+          },
+          {
+            "name": "@api"
+          },
+          {
+            "name": "@deleteUser"
+          },
+          {
+            "name": "@Delete"
+          },
+          {
+            "name": "@NotDeleteUser"
+          }
+        ]
+      },
+      {
+        "line": 5,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 564087557,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I log in with the following user",
+            "match": {
+              "location": "UserSteps2.iLogInWithTheFollowingUser(DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "",
+                  "email",
+                  "fullName",
+                  "password"
+                ]
+              },
+              {
+                "cells": [
+                  "UserA",
+                  "example2@example.com",
+                  "William M",
+                  "M123!"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-05-05T10:41:34.598Z",
+        "before": [
+          {
+            "result": {
+              "duration": 253906,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.setup(Scenario)"
+            }
+          }
+        ],
+        "line": 27,
+        "name": "Get Users",
+        "description": "",
+        "id": "testing-user-methods;get-users",
+        "after": [
+          {
+            "result": {
+              "duration": 662266751,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.doSomethingAfter(Scenario)"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 544045268,
+              "status": "passed"
+            },
+            "line": 28,
+            "name": "I get \"UserA\" user",
+            "match": {
+              "arguments": [
+                {
+                  "val": "UserA",
+                  "offset": 7
+                }
+              ],
+              "location": "UserSteps2.selectUser(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2418968,
+              "status": "passed"
+            },
+            "line": 29,
+            "name": "the status code should be 200",
+            "match": {
+              "arguments": [
+                {
+                  "val": "200",
+                  "offset": 26
+                }
+              ],
+              "location": "CommonSteps.theStatusCodeShouldBe(int)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 13327947,
+              "status": "passed"
+            },
+            "line": 30,
+            "name": "\"UserA\" should have the following key-values",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"UserA\"",
+                  "offset": 0
+                }
+              ],
+              "location": "UserSteps2.shouldHaveTheFollowingKeyValues(String,DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "email",
+                  "fullName",
+                  "timeZone",
+                  "isProUser",
+                  "addItemMoreExpanded",
+                  "editDueDateMoreExpanded",
+                  "listSortType",
+                  "firstDayOfWeek",
+                  "newTaskDueDate"
+                ]
+              },
+              {
+                "cells": [
+                  "example2@example.com",
+                  "William M",
+                  "0",
+                  "false",
+                  "false",
+                  "false",
+                  "0",
+                  "0",
+                  "-1"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@user"
+          },
+          {
+            "name": "@smoke"
+          },
+          {
+            "name": "@api"
+          },
+          {
+            "name": "@deleteUser"
+          },
+          {
+            "name": "@Get"
+          }
+        ]
+      },
+      {
+        "line": 5,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 720002851,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I log in with the following user",
+            "match": {
+              "location": "UserSteps2.iLogInWithTheFollowingUser(DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "",
+                  "email",
+                  "fullName",
+                  "password"
+                ]
+              },
+              {
+                "cells": [
+                  "UserA",
+                  "example2@example.com",
+                  "William M",
+                  "M123!"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-05-05T10:41:36.397Z",
+        "before": [
+          {
+            "result": {
+              "duration": 447558,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.setup(Scenario)"
+            }
+          }
+        ],
+        "line": 35,
+        "name": "Delete User",
+        "description": "",
+        "id": "testing-user-methods;delete-user",
+        "after": [
+          {
+            "result": {
+              "duration": 604866480,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.doSomethingAfter(Scenario)"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 523924782,
+              "status": "passed"
+            },
+            "line": 36,
+            "name": "I update the following users",
+            "match": {
+              "location": "UserSteps2.iUpdate(DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "",
+                  "fullName"
+                ]
+              },
+              {
+                "cells": [
+                  "UserA",
+                  "William Antonio"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 5941344,
+              "status": "passed"
+            },
+            "line": 39,
+            "name": "the status code should be 200",
+            "match": {
+              "arguments": [
+                {
+                  "val": "200",
+                  "offset": 26
+                }
+              ],
+              "location": "CommonSteps.theStatusCodeShouldBe(int)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 513895337,
+              "status": "passed"
+            },
+            "line": 40,
+            "name": "I get \"UserA\" user",
+            "match": {
+              "arguments": [
+                {
+                  "val": "UserA",
+                  "offset": 7
+                }
+              ],
+              "location": "UserSteps2.selectUser(String)"
+            },
+            "keyword": "* "
+          },
+          {
+            "result": {
+              "duration": 1176149,
+              "status": "passed"
+            },
+            "line": 41,
+            "name": "the status code should be 200",
+            "match": {
+              "arguments": [
+                {
+                  "val": "200",
+                  "offset": 26
+                }
+              ],
+              "location": "CommonSteps.theStatusCodeShouldBe(int)"
+            },
+            "keyword": "* "
+          },
+          {
+            "result": {
+              "duration": 11659722,
+              "status": "passed"
+            },
+            "line": 42,
+            "name": "\"UserA\" should have the following key-values",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"UserA\"",
+                  "offset": 0
+                }
+              ],
+              "location": "UserSteps2.shouldHaveTheFollowingKeyValues(String,DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "email",
+                  "fullName",
+                  "timeZone",
+                  "isProUser",
+                  "addItemMoreExpanded",
+                  "editDueDateMoreExpanded",
+                  "listSortType",
+                  "firstDayOfWeek",
+                  "newTaskDueDate"
+                ]
+              },
+              {
+                "cells": [
+                  "example2@example.com",
+                  "William Antonio",
+                  "0",
+                  "false",
+                  "false",
+                  "false",
+                  "0",
+                  "0",
+                  "-1"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@user"
+          },
+          {
+            "name": "@smoke"
+          },
+          {
+            "name": "@api"
+          },
+          {
+            "name": "@deleteUser"
+          },
+          {
+            "name": "@Put"
+          }
+        ]
+      }
+    ],
+    "name": "Testing User methods",
+    "description": "",
+    "id": "testing-user-methods",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/api/user/user.feature",
+    "tags": [
+      {
+        "name": "@user",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      },
+      {
+        "name": "@smoke",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 7
+        }
+      },
+      {
+        "name": "@api",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 14
+        }
+      },
+      {
+        "name": "@deleteUser",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 19
+        }
+      }
+    ]
+  }
+]
