@@ -8,7 +8,7 @@ class EntityManager {
         this.entities = new HashMap()
     }
 
-    public void merge(HashMap otherEntities) {
+    public void merge(Map otherEntities) {
         entities.putAll(otherEntities)
     }
 

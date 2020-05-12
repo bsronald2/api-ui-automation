@@ -20,4 +20,7 @@ class Constants {
     public static final String REQUEST__TYPE = "REQUEST_TYPE"
     public static final String PREFIX = "PREFIX"
     public static final String TAGS = "TAGS"
+
+    /* ASCII CODE*/
+    public static final int CODE_ASCII_A = 65
 }
