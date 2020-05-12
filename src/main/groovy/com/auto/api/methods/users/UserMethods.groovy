@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger
 class UserMethods extends APICall {
 
     private UserResponse userResponse
-    private String endpoint
     private final static Logger logger = LogManager.getLogger(UserMethods.class)
 
     UserMethods() {

@@ -79,7 +79,4 @@ class UserResponse extends ObjectAttributes {
         return result
     }
 
-    public String toString() {
-        return this.asMap().toString()
-    }
 }

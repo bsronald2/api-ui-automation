@@ -11,7 +11,7 @@ abstract class ObjectAttributes {
 
     /**
      * This method return class field values as map
-     * @return map for instance attribute:top_akt, value:yes]
+     * @return map for instance attribute:deleted, value:true]
      */
     public Map asMap() {
         this.class.declaredFields.findAll { !it.synthetic && (it.isAnnotationPresent(JsonProperty.class)) }.collectEntries {
@@ -56,5 +56,9 @@ abstract class ObjectAttributes {
         logger.warn("Object was not parsed into $format")
 
         return null
+    }
+
+    public String toString() {
+        return this.asMap().toString()
     }
 }

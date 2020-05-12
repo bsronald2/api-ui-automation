@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger
 class AuthTodoLy extends APICall {
 
     private User user
-    private String endpoint
     private Authentication auth
     private final static Logger logger = LogManager.getLogger(AuthTodoLy.class)
 

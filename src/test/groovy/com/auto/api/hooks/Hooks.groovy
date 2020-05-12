@@ -1,6 +1,7 @@
 package com.auto.api.hooks
 
 import com.auto.api.methods.auth.AuthTodoLy
+import com.auto.api.methods.projects.ProjectsMethods
 import com.auto.api.methods.users.UserMethods
 import com.auto.utils.CredentialHandler
 import com.auto.utils.EntityManager
@@ -38,6 +39,16 @@ public class Hooks {
         UserMethods userMethods = new UserMethods();
         objects.each {k,v ->
             userMethods.deleteUser(v as Map)
+        }
+    }
+
+    @After("@deleteProject")
+    public void deleteProjectAfter(Scenario scenario) {
+        Map objects = this.entityManager.filterByObjectType("Project")
+
+        ProjectsMethods projectsMethods = new ProjectsMethods();
+        objects.each { k, v ->
+            projectsMethods.deleteProject(v.id)
         }
     }
 }

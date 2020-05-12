@@ -3,6 +3,9 @@ package com.auto.api.hooks;
 import static java.util.Locale.ENGLISH;
 
 
+import com.auto.api.entities.projects.AllProjectResponse;
+import com.auto.api.entities.projects.ProjectRequest;
+import com.auto.api.entities.projects.ProjectResponse;
 import com.auto.api.entities.user.UserRequest;
 import com.auto.api.entities.user.UserResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,6 +35,9 @@ public class TypeRegistryConfig implements TypeRegistryConfigurer {
     public void configureTypeRegistry(TypeRegistry typeRegistry) {
         typeRegistry.defineDataTableType(DataTableType.entry(UserRequest.class));
         typeRegistry.defineDataTableType(DataTableType.entry(UserResponse.class));
+        typeRegistry.defineDataTableType(DataTableType.entry(ProjectResponse.class));
+        typeRegistry.defineDataTableType(DataTableType.entry(ProjectRequest.class));
+        typeRegistry.defineDataTableType(DataTableType.entry(AllProjectResponse.class));
         // add another ...
     }
 }

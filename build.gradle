@@ -3,7 +3,10 @@ apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'idea'
 
-def cucumberArgs = ['--plugin', 'pretty', '--plugin', 'json:report_output/cucumber.json', '--monochrome', '--glue', 'com.auto.api']
+def cucumberArgs = ['--plugin', 'pretty',
+                    '--plugin', 'json:report_output/cucumber.json',
+                    '--monochrome',
+                    '--glue', 'com.auto.api']
 def featurePath = 'src/test/resources/features'
 
 
