@@ -13,7 +13,7 @@ class UserMethods extends APICall {
     private final static Logger logger = LogManager.getLogger(UserMethods.class)
 
     UserMethods() {
-        super(envInfo.url)
+        super()
         this.endpoint = "api/user"
     }
 
@@ -22,7 +22,7 @@ class UserMethods extends APICall {
         Map requestParams = [
                 endPoint: this.endpoint,
                 httpMethod: POST,
-                createUser : userRequest.getFormat(requestType)
+                createUser : userRequest.getFormat(REQUEST_TYPE)
         ]
 
         return call("createUser", requestParams)
@@ -73,7 +73,7 @@ class UserMethods extends APICall {
         Map requestParams = [
                 endPoint: "${this.endpoint}/0",
                 httpMethod: PUT,
-                putUser : userRequest.getFormat(requestType, false)
+                putUser : userRequest.getFormat(REQUEST_TYPE, false)
         ]
 
         if (credentials) { // if credentials are null then use token

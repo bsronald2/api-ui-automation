@@ -2,6 +2,7 @@ package com.auto.utils
 
 
 import com.auto.entities.API
+import com.auto.entities.UI
 import com.auto.entities.User
 import com.auto.entities.Authentication
 
@@ -12,6 +13,7 @@ class EnvInfo {
     int version
     String id
     String url
+    UI ui
 
 
     public void loadInitParams() {

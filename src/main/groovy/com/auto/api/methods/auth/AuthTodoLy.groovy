@@ -14,7 +14,7 @@ class AuthTodoLy extends APICall {
     private final static Logger logger = LogManager.getLogger(AuthTodoLy.class)
 
     AuthTodoLy() {
-        super(envInfo.url)
+        super()
         this.user = envInfo.user
         this.endpoint = "/api/authentication/token"
     }

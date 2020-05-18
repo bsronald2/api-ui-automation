@@ -1,6 +1,6 @@
 package com.auto.api.steps;
 
-import com.auto.utils.CredentialHandler;
+import com.auto.utils.EnvironmentHandler;
 import io.cucumber.java8.En;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,12 +9,10 @@ import org.apache.logging.log4j.Logger;
 public class MyStepdefs implements En {
 
     private final static Logger logger = LogManager.getLogger(MyStepdefs.class);
-    CredentialHandler credentialHandler;
+    EnvironmentHandler environmentHandler;
 
 
-    public MyStepdefs(/*CredentialHandler credentialHandler*/) {
-//        this.credentialHandler = credentialHandler;
-//        System.out.println(this.credentialHandler);
+    public MyStepdefs() {
 
         Given("^I print something \"([^\"]*)\"$", (String arg0) -> {
             System.out.println(arg0);

@@ -1,6 +1,5 @@
 package com.auto.api.client.rest
 
-import com.auto.api.client.APICall
 import com.auto.api.client.ClientInfo
 import com.auto.api.client.IAPIClient
 import io.restassured.http.ContentType
@@ -11,7 +10,7 @@ import io.restassured.specification.RequestSpecification
 import static io.restassured.RestAssured.given
 
 
-class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
+class RestAPIClient implements ClientInfo, IAPIClient, HttpMethods, Request {
 
     private ContentType contentType
     private Response response
@@ -22,8 +21,8 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
     private Map auth
     private RequestSpecification request
 
-    public RestAPIClient(String url) {
-        RestAssured.baseURI = url
+    public RestAPIClient() {
+        RestAssured.baseURI = envInfo.url
         RestAssured.useRelaxedHTTPSValidation()
         this.token = envInfo.api.authentication.tokenString
 
@@ -49,7 +48,7 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
     private Response delete() {
         response = request
                 .when()
-                .delete("${this.endPoint}.${requestType}")
+                .delete("${this.endPoint}.${REQUEST_TYPE}")
 
         return response
     }
@@ -58,7 +57,7 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
         response = request
                   .body(requestBody)
                   .when()
-                  .post("${this.endPoint}.${requestType}")
+                  .post("${this.endPoint}.${REQUEST_TYPE}")
 
         return response
     }
@@ -67,7 +66,7 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
         response = request
                 .body(requestBody)
                 .when()
-                .put("${this.endPoint}.${requestType}")
+                .put("${this.endPoint}.${REQUEST_TYPE}")
 
         return response
     }
@@ -75,7 +74,7 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
     private Response get() {
         response = request
                 .when()
-                .get("${this.endPoint}.${requestType}")
+                .get("${this.endPoint}.${REQUEST_TYPE}")
 
         return response
     }
@@ -92,7 +91,7 @@ class RestAPIClient extends ClientInfo implements IAPIClient, HttpMethods {
         init(APIMethod, params)
         response = request
                 .when()
-                .get(endPoint + ".${requestType}")
+                .get(endPoint + ".${REQUEST_TYPE}")
 
         return response
     }

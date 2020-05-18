@@ -5,8 +5,7 @@ apply plugin: 'idea'
 
 def cucumberArgs = ['--plugin', 'pretty',
                     '--plugin', 'json:report_output/cucumber.json',
-                    '--monochrome',
-                    '--glue', 'com.auto.api']
+                    '--monochrome']
 def featurePath = 'src/test/resources/features'
 
 
@@ -32,6 +31,8 @@ dependencies {
     compile group: "${groups.jackson}", name: 'jackson-annotations', version: "${versions.jackson}"
     compile group: "com.fasterxml.jackson.dataformat", name: 'jackson-dataformat-xml', version: "${versions.jackson}"
     compile group: 'io.rest-assured', name: 'rest-assured', version: "${versions.restassured}"
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+
 
 }
 
@@ -49,7 +50,13 @@ ext.setUpArgs = {
     System.setProperty('userName', userName as String)
     System.setProperty('password', password as String)
 
-    cucumberArgs.addAll(["$featurePath/$execType", '--tags', tags])
+    if (execType == "api") {
+        cucumberArgs.addAll(['--glue', 'com.auto.api', "$featurePath/$execType", '--tags', tags])
+    } else if (execType == "ui") {
+        cucumberArgs.addAll(['--glue', 'com.auto.api', "$featurePath/api",
+                             '--glue', 'com.auto.ui', "$featurePath/ui",
+                             '--tags', tags])
+    }
 
     // Save Args into properties file
     def file = new File(configPath)
