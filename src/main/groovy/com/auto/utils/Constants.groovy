@@ -33,4 +33,7 @@ final class Constants {
     /*OS System*/
     public static final String WINDOWS_OS = "Windows";
     public static final String LINUX_OS = "Linux";
+
+    /* UI Constants*/
+    public static final String MAIN__PAGE = "MAIN_PAGE"
 }

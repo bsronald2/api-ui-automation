@@ -3,11 +3,11 @@
     "line": 2,
     "elements": [
       {
-        "start_timestamp": "2020-05-18T20:44:48.244Z",
+        "start_timestamp": "2020-05-25T19:03:06.726Z",
         "before": [
           {
             "result": {
-              "duration": 10338753448,
+              "duration": 11152715247,
               "status": "passed"
             },
             "match": {
@@ -16,23 +16,115 @@
           }
         ],
         "line": 5,
-        "name": "Login Test",
+        "name": "Create a Project",
         "description": "",
-        "id": "testing-cucumber-ui-folder;login-test",
+        "id": "testing-cucumber-ui-folder;create-a-project",
+        "after": [
+          {
+            "result": {
+              "duration": 1533347827,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.deleteProjectAfter(Scenario)"
+            }
+          },
+          {
+            "result": {
+              "duration": 526085,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.tearDown()"
+            }
+          }
+        ],
         "type": "scenario",
         "keyword": "Scenario",
         "steps": [
           {
             "result": {
-              "duration": 282899,
+              "duration": 4631935494,
               "status": "passed"
             },
             "line": 6,
-            "name": "I log in on the web page",
+            "name": "I create the following project by UI:",
             "match": {
-              "location": "LoginSteps.iLogInOnTheWebPage()"
+              "location": "LeftSideBarSteps.iCreateTheFollowingProjectByUI(DataTable)"
             },
-            "keyword": "Given "
+            "rows": [
+              {
+                "cells": [
+                  "",
+                  "content",
+                  "icon"
+                ]
+              },
+              {
+                "cells": [
+                  "ProjectA",
+                  "Dissertation",
+                  "9"
+                ]
+              },
+              {
+                "cells": [
+                  "ProjectB",
+                  "Assignments",
+                  "5"
+                ]
+              },
+              {
+                "cells": [
+                  "ProjectC",
+                  "English",
+                  "4"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 96221763,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "the projects should be displayed:",
+            "match": {
+              "location": "LeftSideBarSteps.theProjectsShouldBeDisplayed(DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "",
+                  "content",
+                  "icon"
+                ]
+              },
+              {
+                "cells": [
+                  "ProjectA",
+                  "Dissertation",
+                  "9"
+                ]
+              },
+              {
+                "cells": [
+                  "ProjectB",
+                  "Assignments",
+                  "5"
+                ]
+              },
+              {
+                "cells": [
+                  "ProjectC",
+                  "English",
+                  "4"
+                ]
+              }
+            ],
+            "keyword": "Then "
           }
         ],
         "tags": [
@@ -40,7 +132,10 @@
             "name": "@ui"
           },
           {
-            "name": "@login"
+            "name": "@projects_ui"
+          },
+          {
+            "name": "@deleteProject"
           }
         ]
       }
@@ -49,7 +144,7 @@
     "description": "",
     "id": "testing-cucumber-ui-folder",
     "keyword": "Feature",
-    "uri": "file:src/test/resources/features/ui/test123.feature",
+    "uri": "file:src/test/resources/features/ui/projectsUI.feature",
     "tags": [
       {
         "name": "@ui",
@@ -57,6 +152,14 @@
         "location": {
           "line": 1,
           "column": 1
+        }
+      },
+      {
+        "name": "@projects_ui",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 5
         }
       }
     ]

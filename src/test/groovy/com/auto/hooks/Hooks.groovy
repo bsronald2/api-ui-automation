@@ -1,15 +1,14 @@
-package com.auto.api.hooks
+package com.auto.hooks
 
 import com.auto.api.client.ClientInfo
 import com.auto.api.methods.auth.AuthTodoLy
 import com.auto.api.methods.projects.ProjectsMethods
 import com.auto.api.methods.users.UserMethods
+import com.auto.ui.pages.MainPage
 import com.auto.ui.pages.login.SignInForm
 import com.auto.utils.Constants
 import com.auto.utils.EntityManager
-import com.auto.utils.EnvInfo
 import com.auto.utils.files.Configuration
-import com.auto.utils.files.ConfigurationHandler
 import io.cucumber.core.api.Scenario
 import io.cucumber.java.After
 import io.cucumber.java.Before
@@ -31,15 +30,16 @@ public class Hooks implements ClientInfo {
             authTodoLy.basicAuth()
             SET_UP_ENV_FLAG = 0;
             if (Configuration.getConfigurationValue(Constants.EXEC__TYPE).equalsIgnoreCase("ui")) {
-                SignInForm.loginAs(envInfo.getUser().getUserName(), envInfo.getUser().getPassword())
+                MainPage mainPage = SignInForm.loginAs(envInfo.getUser().getUserName(), envInfo.getUser().getPassword())
+                this.entityManager.put(Constants.MAIN__PAGE, mainPage)
             }
         }
     }
 
-//    @After
-//    public void tearDown() {
-//
-//    }
+    @After
+    public void tearDown() {
+        this.entityManager.clear()
+    }
 
     @After("@deleteUser and not @NotDeleteUser")
     public void doSomethingAfter(Scenario scenario){
