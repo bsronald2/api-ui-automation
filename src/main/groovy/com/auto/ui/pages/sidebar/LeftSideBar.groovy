@@ -51,7 +51,7 @@ class LeftSideBar extends AbstractBasePage {
      * @param request
      */
     public ProjectResponse selectIcon(ProjectRequest request) {
-        WebElement elementProject = getProjectWebElement(request.content)
+        WebElement elementProject = getProjectWebElementByName(request.content)
         final String projectId = elementProject.getAttribute("itemid")
 
         ContextMenu contextMenu = clickOnProjectOptions(elementProject)
@@ -62,6 +62,37 @@ class LeftSideBar extends AbstractBasePage {
                 .build()
     }
 
+    public ProjectResponse updateProjectName(ProjectResponse projectToUpdate, ProjectRequest projectRequest) {
+        // Retrieve Web Element
+        final String projectId = projectToUpdate.id
+        final WebElement projectElementToUpdate = getProjectWebElementById(projectId)
+
+        // Click on Element to update & Click on Options Drop Down Element
+        CommonActions.clickElement(projectElementToUpdate)
+        ContextMenu contextMenu = clickOnProjectOptions(projectElementToUpdate)
+        contextMenu.clickOnEditBtn()
+
+        // Edit Name
+        By inputText = By.cssSelector("input[id='ItemEditTextbox'][itemid='${projectId}']")
+        WebElement inputTextEdit = driver.findElement(inputText)
+        CommonActions.sendKeys(inputTextEdit, projectRequest.content)
+
+        // Click on save new name
+        By saveBtnBy = By.cssSelector("img[title='Save'][itemid='${projectId}']")
+        WebElement saveBtnWebElement = driver.findElement(saveBtnBy)
+        CommonActions.clickElement(saveBtnWebElement)
+
+        return new ProjectResponseBuilder()
+                .id(Integer.parseInt(projectId))
+                .content(projectRequest.content)
+                .build()
+    }
+
+    public WebElement getProjectWebElementById(String elementId) {
+        By projectBy = By.cssSelector("#ItemId_${elementId} td.ProjItemContent")
+
+        return driver.findElement(projectBy)
+    }
 
     /**
      * Click on project options icon.
@@ -90,7 +121,7 @@ class LeftSideBar extends AbstractBasePage {
      * @param projectName
      * @return
      */
-    public WebElement getProjectWebElement(String projectName) {
+    public WebElement getProjectWebElementByName(String projectName) {
         final By byProject = By.xpath("//td[@class='ProjItemContent' and contains(., '$projectName')]")
 
         return driver.findElement(byProject)
@@ -120,4 +151,5 @@ class LeftSideBar extends AbstractBasePage {
 
         return UICommonMethods.isElementPresent(byCss)
     }
+
 }

@@ -3,11 +3,11 @@
     "line": 2,
     "elements": [
       {
-        "start_timestamp": "2020-05-25T19:03:06.726Z",
+        "start_timestamp": "2020-06-21T12:48:43.373Z",
         "before": [
           {
             "result": {
-              "duration": 11152715247,
+              "duration": 10758984915,
               "status": "passed"
             },
             "match": {
@@ -22,7 +22,7 @@
         "after": [
           {
             "result": {
-              "duration": 1533347827,
+              "duration": 2668220286,
               "status": "passed"
             },
             "match": {
@@ -31,7 +31,7 @@
           },
           {
             "result": {
-              "duration": 526085,
+              "duration": 184283001,
               "status": "passed"
             },
             "match": {
@@ -44,7 +44,7 @@
         "steps": [
           {
             "result": {
-              "duration": 4631935494,
+              "duration": 5472463117,
               "status": "passed"
             },
             "line": 6,
@@ -86,7 +86,7 @@
           },
           {
             "result": {
-              "duration": 96221763,
+              "duration": 94769343,
               "status": "passed"
             },
             "line": 11,
@@ -121,6 +121,143 @@
                   "ProjectC",
                   "English",
                   "4"
+                ]
+              }
+            ],
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ui"
+          },
+          {
+            "name": "@projects_ui"
+          },
+          {
+            "name": "@deleteProject"
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-06-21T12:49:02.562Z",
+        "before": [
+          {
+            "result": {
+              "duration": 156073,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.setup(Scenario)"
+            }
+          }
+        ],
+        "line": 18,
+        "name": "Update Project Name",
+        "description": "",
+        "id": "testing-cucumber-ui-folder;update-project-name",
+        "after": [
+          {
+            "result": {
+              "duration": 543878543,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.deleteProjectAfter(Scenario)"
+            }
+          },
+          {
+            "result": {
+              "duration": 229152444,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1735709155,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "I create the following project by UI:",
+            "match": {
+              "location": "LeftSideBarSteps.iCreateTheFollowingProjectByUI(DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "",
+                  "content",
+                  "icon"
+                ]
+              },
+              {
+                "cells": [
+                  "ProjectA",
+                  "Dissertation",
+                  "9"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1137428913,
+              "status": "passed"
+            },
+            "line": 22,
+            "name": "I update the project by UI",
+            "match": {
+              "location": "LeftSideBarSteps.iUpdateTheProject(DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "",
+                  "content",
+                  "icon"
+                ]
+              },
+              {
+                "cells": [
+                  "ProjectA",
+                  "Thesis Summer 20",
+                  "5"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1147436233,
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "the projects should be displayed:",
+            "match": {
+              "location": "LeftSideBarSteps.theProjectsShouldBeDisplayed(DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "",
+                  "content",
+                  "icon"
+                ]
+              },
+              {
+                "cells": [
+                  "ProjectA",
+                  "Thesis Summer 20",
+                  "5"
                 ]
               }
             ],

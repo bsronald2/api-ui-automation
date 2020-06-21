@@ -1,6 +1,7 @@
 package com.auto.ui.pages.headers;
 
 import com.auto.ui.pages.AbstractBasePage
+import com.auto.ui.pages.common.CommonActions
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.support.FindBy
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,5 +23,9 @@ public class ContentHeader extends AbstractBasePage {
 
     public ContentHeader() {
         waitPage()
+    }
+
+    public clickOnRefresh() {
+        CommonActions.clickElement(refreshButton)
     }
 }

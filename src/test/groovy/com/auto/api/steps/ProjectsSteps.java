@@ -86,4 +86,13 @@ public class ProjectsSteps implements CucumberConstants {
         }
 
     }
+
+//    @When("I update the project")
+//    public void iUpdateTheProject(DataTable table) {
+//        Map<String, ProjectRequest> projects = table.asMap(String.class, ProjectRequest.class);
+//        for (Map.Entry<String, ProjectRequest> entry : projects.entrySet()) {
+//            ProjectResponse projectResponse = (ProjectResponse) this
+//
+//        }
+//    }
 }

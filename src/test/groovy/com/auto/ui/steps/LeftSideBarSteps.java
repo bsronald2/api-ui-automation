@@ -10,7 +10,6 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-
 import java.util.Map;
 
 public class LeftSideBarSteps {
@@ -21,6 +20,9 @@ public class LeftSideBarSteps {
     public LeftSideBarSteps(EntityManager entityManager) {
         this.entityManager = entityManager;
         mainPage = (MainPage) entityManager.getEntity(Constants.MAIN__PAGE);
+        if (mainPage == null) {
+            mainPage = new MainPage();
+        }
     }
 
 
@@ -43,5 +45,18 @@ public class LeftSideBarSteps {
             Assert.assertTrue("Project " + projectResponse.getContent() + " was not created",
                     leftSideBar.isProjectDisplayed(projectResponse));
         }
+    }
+
+    @When("I update the project by UI")
+    public void iUpdateTheProject(DataTable table) {
+        Map<String, ProjectRequest> projects = table.asMap(String.class, ProjectRequest.class);
+        for (Map.Entry<String, ProjectRequest> entry : projects.entrySet()) {
+            ProjectRequest projectRequest = entry.getValue();
+            ProjectResponse projectToUpdate = (ProjectResponse) this.entityManager.getEntity(entry.getKey());
+            LeftSideBar leftSideBar = mainPage.getLeftSideBar();
+            leftSideBar.updateProjectName(projectToUpdate, projectRequest);
+
+        }
+
     }
 }
