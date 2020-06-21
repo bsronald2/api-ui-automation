@@ -14,7 +14,7 @@ public class ProjectsMethods extends APICall {
     private final static Logger logger = LogManager.getLogger(ProjectsMethods.class)
 
     public ProjectsMethods() {
-        super(envInfo.getUrl());
+        super();
         this.endpoint = "api/projects"
     }
 
@@ -70,7 +70,7 @@ public class ProjectsMethods extends APICall {
         Map requestParams = [
                 endPoint: this.endpoint,
                 httpMethod: POST,
-                postProject : projectRequest.getFormat(requestType, false)
+                postProject : projectRequest.getFormat(REQUEST_TYPE, false)
         ]
 
         return call("postProject", requestParams)
@@ -92,7 +92,7 @@ public class ProjectsMethods extends APICall {
         Map requestParams = [
                 endPoint: "${this.endpoint}/$id",
                 httpMethod: PUT,
-                updateProject : projectRequest.getFormat(requestType, false)
+                updateProject : projectRequest.getFormat(REQUEST_TYPE, false)
         ]
 
         return call("updateProject", requestParams)

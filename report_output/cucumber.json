@@ -3,11 +3,11 @@
     "line": 2,
     "elements": [
       {
-        "start_timestamp": "2020-05-12T16:20:47.055Z",
+        "start_timestamp": "2020-06-21T12:48:43.373Z",
         "before": [
           {
             "result": {
-              "duration": 2076726907,
+              "duration": 10758984915,
               "status": "passed"
             },
             "match": {
@@ -15,195 +15,28 @@
             }
           }
         ],
-        "line": 6,
-        "name": "Get All Projects by Default",
+        "line": 5,
+        "name": "Create a Project",
         "description": "",
-        "id": "testing-projects-methods;get-all-projects-by-default",
-        "type": "scenario",
-        "keyword": "Scenario",
-        "steps": [
-          {
-            "result": {
-              "duration": 639194788,
-              "status": "passed"
-            },
-            "line": 7,
-            "name": "I get \"all\" projects",
-            "match": {
-              "arguments": [
-                {
-                  "val": "\"all\"",
-                  "offset": 6
-                }
-              ],
-              "location": "ProjectsSteps.iGetProjects(String)"
-            },
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "duration": 1064924,
-              "status": "passed"
-            },
-            "line": 8,
-            "name": "the status code should be 200",
-            "match": {
-              "arguments": [
-                {
-                  "val": "200",
-                  "offset": 26
-                }
-              ],
-              "location": "CommonSteps.theStatusCodeShouldBe(int)"
-            },
-            "keyword": "Then "
-          },
-          {
-            "result": {
-              "duration": 256081197,
-              "status": "passed"
-            },
-            "line": 9,
-            "name": "the projects should have the following key-value",
-            "match": {
-              "location": "ProjectsSteps.theProjectsShouldHaveTheFollowingKeyValue(DataTable)"
-            },
-            "rows": [
-              {
-                "cells": [
-                  "",
-                  "content",
-                  "itemsCount",
-                  "icon",
-                  "itemType",
-                  "collapsed",
-                  "itemOrder",
-                  "isProjectShared",
-                  "isShareApproved",
-                  "isOwnProject",
-                  "deleted"
-                ]
-              },
-              {
-                "cells": [
-                  "ProjectA",
-                  "Work",
-                  "5",
-                  "10",
-                  "2",
-                  "false",
-                  "1",
-                  "false",
-                  "false",
-                  "true",
-                  "false"
-                ]
-              },
-              {
-                "cells": [
-                  "ProjectB",
-                  "Home",
-                  "0",
-                  "1",
-                  "2",
-                  "false",
-                  "2",
-                  "false",
-                  "false",
-                  "true",
-                  "false"
-                ]
-              },
-              {
-                "cells": [
-                  "ProjectC",
-                  "Study",
-                  "0",
-                  "4",
-                  "2",
-                  "false",
-                  "3",
-                  "false",
-                  "false",
-                  "true",
-                  "false"
-                ]
-              },
-              {
-                "cells": [
-                  "ProjectD",
-                  "Personal",
-                  "0",
-                  "6",
-                  "2",
-                  "false",
-                  "4",
-                  "false",
-                  "false",
-                  "true",
-                  "false"
-                ]
-              },
-              {
-                "cells": [
-                  "ProjectE",
-                  "Shopping List",
-                  "0",
-                  "14",
-                  "2",
-                  "false",
-                  "5",
-                  "false",
-                  "false",
-                  "true",
-                  "false"
-                ]
-              }
-            ],
-            "keyword": "* "
-          }
-        ],
-        "tags": [
-          {
-            "name": "@projects"
-          },
-          {
-            "name": "@smoke"
-          },
-          {
-            "name": "@api"
-          },
-          {
-            "name": "@GetAll"
-          }
-        ]
-      },
-      {
-        "start_timestamp": "2020-05-12T16:20:50.045Z",
-        "before": [
-          {
-            "result": {
-              "duration": 130723,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.setup(Scenario)"
-            }
-          }
-        ],
-        "line": 19,
-        "name": "Post Projects",
-        "description": "",
-        "id": "testing-projects-methods;post-projects",
+        "id": "testing-cucumber-ui-folder;create-a-project",
         "after": [
           {
             "result": {
-              "duration": 1458209361,
+              "duration": 2668220286,
               "status": "passed"
             },
             "match": {
               "location": "Hooks.deleteProjectAfter(Scenario)"
             }
+          },
+          {
+            "result": {
+              "duration": 184283001,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.tearDown()"
+            }
           }
         ],
         "type": "scenario",
@@ -211,13 +44,13 @@
         "steps": [
           {
             "result": {
-              "duration": 1707051854,
+              "duration": 5472463117,
               "status": "passed"
             },
-            "line": 20,
-            "name": "I create the following project:",
+            "line": 6,
+            "name": "I create the following project by UI:",
             "match": {
-              "location": "ProjectsSteps.iCreateTheFollowingProject(DataTable)"
+              "location": "LeftSideBarSteps.iCreateTheFollowingProjectByUI(DataTable)"
             },
             "rows": [
               {
@@ -253,109 +86,53 @@
           },
           {
             "result": {
-              "duration": 1654352,
+              "duration": 94769343,
               "status": "passed"
             },
-            "line": 25,
-            "name": "the status code should be 200",
+            "line": 11,
+            "name": "the projects should be displayed:",
             "match": {
-              "arguments": [
-                {
-                  "val": "200",
-                  "offset": 26
-                }
-              ],
-              "location": "CommonSteps.theStatusCodeShouldBe(int)"
-            },
-            "keyword": "Then "
-          },
-          {
-            "result": {
-              "duration": 14888639,
-              "status": "passed"
-            },
-            "line": 26,
-            "name": "the projects should have the following key-value",
-            "match": {
-              "location": "ProjectsSteps.theProjectsShouldHaveTheFollowingKeyValue(DataTable)"
+              "location": "LeftSideBarSteps.theProjectsShouldBeDisplayed(DataTable)"
             },
             "rows": [
               {
                 "cells": [
                   "",
                   "content",
-                  "itemsCount",
-                  "icon",
-                  "itemType",
-                  "parentId",
-                  "collapsed",
-                  "isProjectShared",
-                  "isShareApproved",
-                  "isOwnProject",
-                  "deleted"
+                  "icon"
                 ]
               },
               {
                 "cells": [
                   "ProjectA",
                   "Dissertation",
-                  "0",
-                  "9",
-                  "2",
-                  "null",
-                  "false",
-                  "false",
-                  "false",
-                  "true",
-                  "false"
+                  "9"
                 ]
               },
               {
                 "cells": [
                   "ProjectB",
                   "Assignments",
-                  "0",
-                  "5",
-                  "2",
-                  "null",
-                  "false",
-                  "false",
-                  "false",
-                  "true",
-                  "false"
+                  "5"
                 ]
               },
               {
                 "cells": [
                   "ProjectC",
                   "English",
-                  "0",
-                  "4",
-                  "2",
-                  "null",
-                  "false",
-                  "false",
-                  "false",
-                  "true",
-                  "false"
+                  "4"
                 ]
               }
             ],
-            "keyword": "* "
+            "keyword": "Then "
           }
         ],
         "tags": [
           {
-            "name": "@projects"
+            "name": "@ui"
           },
           {
-            "name": "@smoke"
-          },
-          {
-            "name": "@api"
-          },
-          {
-            "name": "@Post"
+            "name": "@projects_ui"
           },
           {
             "name": "@deleteProject"
@@ -363,11 +140,11 @@
         ]
       },
       {
-        "start_timestamp": "2020-05-12T16:20:53.230Z",
+        "start_timestamp": "2020-06-21T12:49:02.562Z",
         "before": [
           {
             "result": {
-              "duration": 181655,
+              "duration": 156073,
               "status": "passed"
             },
             "match": {
@@ -375,18 +152,27 @@
             }
           }
         ],
-        "line": 33,
-        "name": "Post Projects",
+        "line": 18,
+        "name": "Update Project Name",
         "description": "",
-        "id": "testing-projects-methods;post-projects",
+        "id": "testing-cucumber-ui-folder;update-project-name",
         "after": [
           {
             "result": {
-              "duration": 470326888,
+              "duration": 543878543,
               "status": "passed"
             },
             "match": {
               "location": "Hooks.deleteProjectAfter(Scenario)"
+            }
+          },
+          {
+            "result": {
+              "duration": 229152444,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.tearDown()"
             }
           }
         ],
@@ -395,13 +181,13 @@
         "steps": [
           {
             "result": {
-              "duration": 476901463,
+              "duration": 1735709155,
               "status": "passed"
             },
-            "line": 34,
-            "name": "I create the following project:",
+            "line": 19,
+            "name": "I create the following project by UI:",
             "match": {
-              "location": "ProjectsSteps.iCreateTheFollowingProject(DataTable)"
+              "location": "LeftSideBarSteps.iCreateTheFollowingProjectByUI(DataTable)"
             },
             "rows": [
               {
@@ -423,150 +209,13 @@
           },
           {
             "result": {
-              "duration": 1229909,
+              "duration": 1137428913,
               "status": "passed"
             },
-            "line": 37,
-            "name": "the status code should be 200",
+            "line": 22,
+            "name": "I update the project by UI",
             "match": {
-              "arguments": [
-                {
-                  "val": "200",
-                  "offset": 26
-                }
-              ],
-              "location": "CommonSteps.theStatusCodeShouldBe(int)"
-            },
-            "keyword": "* "
-          },
-          {
-            "result": {
-              "duration": 483960222,
-              "status": "passed"
-            },
-            "line": 38,
-            "name": "I get \"ProjectA\" projects",
-            "match": {
-              "arguments": [
-                {
-                  "val": "\"ProjectA\"",
-                  "offset": 6
-                }
-              ],
-              "location": "ProjectsSteps.iGetProjects(String)"
-            },
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "duration": 407511,
-              "status": "passed"
-            },
-            "line": 39,
-            "name": "the status code should be 200",
-            "match": {
-              "arguments": [
-                {
-                  "val": "200",
-                  "offset": 26
-                }
-              ],
-              "location": "CommonSteps.theStatusCodeShouldBe(int)"
-            },
-            "keyword": "Then "
-          },
-          {
-            "result": {
-              "duration": 3131498,
-              "status": "passed"
-            },
-            "line": 40,
-            "name": "the projects should have the following key-value",
-            "match": {
-              "location": "ProjectsSteps.theProjectsShouldHaveTheFollowingKeyValue(DataTable)"
-            },
-            "rows": [
-              {
-                "cells": [
-                  "",
-                  "content",
-                  "itemsCount",
-                  "icon",
-                  "itemType",
-                  "parentId",
-                  "collapsed",
-                  "isProjectShared",
-                  "isShareApproved",
-                  "isOwnProject",
-                  "deleted"
-                ]
-              },
-              {
-                "cells": [
-                  "ProjectA",
-                  "Dissertation",
-                  "0",
-                  "9",
-                  "2",
-                  "null",
-                  "false",
-                  "false",
-                  "false",
-                  "true",
-                  "false"
-                ]
-              }
-            ],
-            "keyword": "* "
-          }
-        ],
-        "tags": [
-          {
-            "name": "@projects"
-          },
-          {
-            "name": "@smoke"
-          },
-          {
-            "name": "@api"
-          },
-          {
-            "name": "@Get"
-          },
-          {
-            "name": "@deleteProject"
-          }
-        ]
-      },
-      {
-        "start_timestamp": "2020-05-12T16:20:54.669Z",
-        "before": [
-          {
-            "result": {
-              "duration": 135259,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.setup(Scenario)"
-            }
-          }
-        ],
-        "line": 45,
-        "name": "Post Projects",
-        "description": "",
-        "id": "testing-projects-methods;post-projects",
-        "type": "scenario",
-        "keyword": "Scenario",
-        "steps": [
-          {
-            "result": {
-              "duration": 482553219,
-              "status": "passed"
-            },
-            "line": 46,
-            "name": "I create the following project:",
-            "match": {
-              "location": "ProjectsSteps.iCreateTheFollowingProject(DataTable)"
+              "location": "LeftSideBarSteps.iUpdateTheProject(DataTable)"
             },
             "rows": [
               {
@@ -579,167 +228,22 @@
               {
                 "cells": [
                   "ProjectA",
-                  "Dissertation",
-                  "7"
+                  "Thesis Summer 20",
+                  "5"
                 ]
               }
             ],
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "duration": 463544,
-              "status": "passed"
-            },
-            "line": 49,
-            "name": "the status code should be 200",
-            "match": {
-              "arguments": [
-                {
-                  "val": "200",
-                  "offset": 26
-                }
-              ],
-              "location": "CommonSteps.theStatusCodeShouldBe(int)"
-            },
-            "keyword": "* "
-          },
-          {
-            "result": {
-              "duration": 462902555,
-              "status": "passed"
-            },
-            "line": 50,
-            "name": "I delete \"ProjectA\" projects",
-            "match": {
-              "arguments": [
-                {
-                  "val": "\"ProjectA\"",
-                  "offset": 9
-                }
-              ],
-              "location": "ProjectsSteps.iDeleteProjects(String)"
-            },
             "keyword": "When "
           },
           {
             "result": {
-              "duration": 406602,
+              "duration": 1147436233,
               "status": "passed"
             },
-            "line": 51,
-            "name": "the status code should be 200",
+            "line": 25,
+            "name": "the projects should be displayed:",
             "match": {
-              "arguments": [
-                {
-                  "val": "200",
-                  "offset": 26
-                }
-              ],
-              "location": "CommonSteps.theStatusCodeShouldBe(int)"
-            },
-            "keyword": "Then "
-          },
-          {
-            "result": {
-              "duration": 5511394,
-              "status": "passed"
-            },
-            "line": 52,
-            "name": "the projects should have the following key-value",
-            "match": {
-              "location": "ProjectsSteps.theProjectsShouldHaveTheFollowingKeyValue(DataTable)"
-            },
-            "rows": [
-              {
-                "cells": [
-                  "",
-                  "content",
-                  "itemsCount",
-                  "icon",
-                  "itemType",
-                  "parentId",
-                  "collapsed",
-                  "isProjectShared",
-                  "isShareApproved",
-                  "isOwnProject",
-                  "deleted"
-                ]
-              },
-              {
-                "cells": [
-                  "ProjectA",
-                  "Dissertation",
-                  "0",
-                  "7",
-                  "2",
-                  "null",
-                  "false",
-                  "false",
-                  "false",
-                  "true",
-                  "true"
-                ]
-              }
-            ],
-            "keyword": "* "
-          }
-        ],
-        "tags": [
-          {
-            "name": "@projects"
-          },
-          {
-            "name": "@smoke"
-          },
-          {
-            "name": "@api"
-          },
-          {
-            "name": "@Delete"
-          }
-        ]
-      },
-      {
-        "start_timestamp": "2020-05-12T16:20:55.626Z",
-        "before": [
-          {
-            "result": {
-              "duration": 117121,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.setup(Scenario)"
-            }
-          }
-        ],
-        "line": 57,
-        "name": "Post Projects",
-        "description": "",
-        "id": "testing-projects-methods;post-projects",
-        "after": [
-          {
-            "result": {
-              "duration": 495362734,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.deleteProjectAfter(Scenario)"
-            }
-          }
-        ],
-        "type": "scenario",
-        "keyword": "Scenario",
-        "steps": [
-          {
-            "result": {
-              "duration": 499066421,
-              "status": "passed"
-            },
-            "line": 58,
-            "name": "I create the following project:",
-            "match": {
-              "location": "ProjectsSteps.iCreateTheFollowingProject(DataTable)"
+              "location": "LeftSideBarSteps.theProjectsShouldBeDisplayed(DataTable)"
             },
             "rows": [
               {
@@ -752,116 +256,20 @@
               {
                 "cells": [
                   "ProjectA",
-                  "Tesis",
-                  "7"
+                  "Thesis Summer 20",
+                  "5"
                 ]
               }
             ],
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "duration": 466411993,
-              "status": "passed"
-            },
-            "line": 61,
-            "name": "I update the following projects",
-            "match": {
-              "location": "ProjectsSteps.iUpdateTheFollowingProjects(DataTable)"
-            },
-            "rows": [
-              {
-                "cells": [
-                  "",
-                  "content",
-                  "icon"
-                ]
-              },
-              {
-                "cells": [
-                  "ProjectA",
-                  "Tesis123",
-                  "8"
-                ]
-              }
-            ],
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "duration": 455986,
-              "status": "passed"
-            },
-            "line": 64,
-            "name": "the status code should be 200",
-            "match": {
-              "arguments": [
-                {
-                  "val": "200",
-                  "offset": 26
-                }
-              ],
-              "location": "CommonSteps.theStatusCodeShouldBe(int)"
-            },
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "duration": 3233345,
-              "status": "passed"
-            },
-            "line": 65,
-            "name": "the projects should have the following key-value",
-            "match": {
-              "location": "ProjectsSteps.theProjectsShouldHaveTheFollowingKeyValue(DataTable)"
-            },
-            "rows": [
-              {
-                "cells": [
-                  "",
-                  "content",
-                  "itemsCount",
-                  "icon",
-                  "itemType",
-                  "parentId",
-                  "collapsed",
-                  "isProjectShared",
-                  "isShareApproved",
-                  "isOwnProject",
-                  "deleted"
-                ]
-              },
-              {
-                "cells": [
-                  "ProjectA",
-                  "Tesis123",
-                  "0",
-                  "8",
-                  "2",
-                  "null",
-                  "false",
-                  "false",
-                  "false",
-                  "true",
-                  "false"
-                ]
-              }
-            ],
-            "keyword": "* "
           }
         ],
         "tags": [
           {
-            "name": "@projects"
+            "name": "@ui"
           },
           {
-            "name": "@smoke"
-          },
-          {
-            "name": "@api"
-          },
-          {
-            "name": "@Put"
+            "name": "@projects_ui"
           },
           {
             "name": "@deleteProject"
@@ -869,14 +277,14 @@
         ]
       }
     ],
-    "name": "Testing Projects methods",
+    "name": "Testing Cucumber UI folder",
     "description": "",
-    "id": "testing-projects-methods",
+    "id": "testing-cucumber-ui-folder",
     "keyword": "Feature",
-    "uri": "file:src/test/resources/features/api/projects/projects.feature",
+    "uri": "file:src/test/resources/features/ui/projectsUI.feature",
     "tags": [
       {
-        "name": "@projects",
+        "name": "@ui",
         "type": "Tag",
         "location": {
           "line": 1,
@@ -884,19 +292,11 @@
         }
       },
       {
-        "name": "@smoke",
+        "name": "@projects_ui",
         "type": "Tag",
         "location": {
           "line": 1,
-          "column": 11
-        }
-      },
-      {
-        "name": "@api",
-        "type": "Tag",
-        "location": {
-          "line": 1,
-          "column": 18
+          "column": 5
         }
       }
     ]

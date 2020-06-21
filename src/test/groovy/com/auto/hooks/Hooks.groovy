@@ -1,19 +1,25 @@
-package com.auto.api.hooks
+package com.auto.hooks
 
+import com.auto.api.client.ClientInfo
 import com.auto.api.methods.auth.AuthTodoLy
 import com.auto.api.methods.projects.ProjectsMethods
 import com.auto.api.methods.users.UserMethods
-import com.auto.utils.CredentialHandler
+import com.auto.ui.pages.MainPage
+import com.auto.ui.pages.headers.ContentHeader
+import com.auto.ui.pages.login.SignInForm
+import com.auto.utils.Constants
 import com.auto.utils.EntityManager
+import com.auto.utils.files.Configuration
 import io.cucumber.core.api.Scenario
 import io.cucumber.java.After
 import io.cucumber.java.Before
 
 
 
-public class Hooks {
+public class Hooks implements ClientInfo {
     public static int SET_UP_ENV_FLAG = 1
     private EntityManager entityManager
+
     public Hooks(EntityManager entityManager) {
         this.entityManager = entityManager
     }
@@ -24,15 +30,24 @@ public class Hooks {
             AuthTodoLy authTodoLy = new AuthTodoLy()
             authTodoLy.basicAuth()
             SET_UP_ENV_FLAG = 0;
+            if (Configuration.getConfigurationValue(Constants.EXEC__TYPE).equalsIgnoreCase("ui")) {
+                MainPage mainPage = SignInForm.loginAs(envInfo.getUser().getUserName(), envInfo.getUser().getPassword())
+                this.entityManager.put(Constants.MAIN__PAGE, mainPage)
+                Support.cleanUIEnvironment()
+            }
         }
     }
 
-//    @After
-//    public void tearDown() {
-//
-//    }
+    @After(order = 1) // Last 'After'execution
+    public void tearDown() {
+        this.entityManager.clear()
+        if (Configuration.getConfigurationValue(Constants.EXEC__TYPE).equalsIgnoreCase("ui")) {
+            ContentHeader contentHeader = new MainPage().getContentHeader()
+            contentHeader.clickOnRefresh()
+        }
+    }
 
-    @After("@deleteUser and not @NotDeleteUser")
+    @After(value = "@deleteUser and not @NotDeleteUser", order = 10)
     public void doSomethingAfter(Scenario scenario){
         Map objects = this.entityManager.filterByObjectType("_AUTH")
 
@@ -42,10 +57,9 @@ public class Hooks {
         }
     }
 
-    @After("@deleteProject")
+    @After(value = "@deleteProject", order = 10)
     public void deleteProjectAfter(Scenario scenario) {
         Map objects = this.entityManager.filterByObjectType("Project")
-
         ProjectsMethods projectsMethods = new ProjectsMethods();
         objects.each { k, v ->
             projectsMethods.deleteProject(v.id)

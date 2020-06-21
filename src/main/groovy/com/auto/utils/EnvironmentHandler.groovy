@@ -1,11 +1,11 @@
 package com.auto.utils
 import com.auto.utils.files.YamlFile
 
-public class CredentialHandler {
+public class EnvironmentHandler {
 
     private EnvInfo envInfo
 
-    public CredentialHandler(String filePath) {
+    public EnvironmentHandler(String filePath) {
         loadFile(filePath)
     }
 

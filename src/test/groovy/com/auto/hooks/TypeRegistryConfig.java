@@ -1,4 +1,4 @@
-package com.auto.api.hooks;
+package com.auto.hooks;
 
 import static java.util.Locale.ENGLISH;
 

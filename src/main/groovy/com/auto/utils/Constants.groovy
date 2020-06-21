@@ -3,8 +3,13 @@ package com.auto.utils
 import java.nio.file.Path
 import java.nio.file.Paths
 
-class Constants {
+final class Constants {
 
+    /**
+     * This Constructor to default.
+     */
+    private Constants() {
+    }
 
     // Absolute Paths
     public static Path dir = Paths.get('src')
@@ -23,4 +28,12 @@ class Constants {
 
     /* ASCII CODE*/
     public static final int CODE_ASCII_A = 65
+
+
+    /*OS System*/
+    public static final String WINDOWS_OS = "Windows";
+    public static final String LINUX_OS = "Linux";
+
+    /* UI Constants*/
+    public static final String MAIN__PAGE = "MAIN_PAGE"
 }

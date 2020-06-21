@@ -9,3 +9,12 @@ api:
     tokenString: "<token_generated>"
     userMail: "user.mail@example.com"
     expirationTime: "2019-01-01"
+ui:
+  browser: "Chrome"
+  timeout: 15
+  remote:
+    browser: "Chrome"
+    browserVersion: "81.0"
+    platform: "Windows"
+    platformVersion: "8.1"
+    resolution: "1920x1080"
